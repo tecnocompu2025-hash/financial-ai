@@ -1,27 +1,65 @@
-# ROADMAP
+# Roadmap Financial AI
 
-## Fase 1 (MVP)
+## Fase 1
 
-✅ Backend
+✔ Login
 
-✅ Frontend
+✔ Registro
 
-✅ Tailwind
+✔ JWT
 
-⬜ Login
+✔ Perfil financiero
 
-⬜ Dashboard
+---
 
-⬜ Sidebar
+## Fase 2
 
-⬜ Patrimonio Neto
+Ingresos
 
-⬜ Flujo de Caja
+Gastos
 
-⬜ Activos
+Activos
 
-⬜ Pasivos
+Pasivos
 
-⬜ Metas
+Patrimonio
 
-⬜ IA Financiera
+---
+
+## Fase 3
+
+Cash Flow
+
+Emergency Fund
+
+Savings Rate
+
+Financial Score
+
+Financial Freedom %
+
+---
+
+## Fase 4
+
+Motor IA
+
+Analizar hábitos
+
+Encontrar gastos innecesarios
+
+Plan de inversión
+
+Plan para jubilarse
+
+Proyección a 5,10,20 años
+
+---
+
+## Inspiración
+
+Padre Rico Padre Pobre
+
+The Millionaire Next Door
+
+The Psychology of Money
