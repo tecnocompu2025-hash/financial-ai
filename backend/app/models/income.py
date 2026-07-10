@@ -1,6 +1,12 @@
-from datetime import date
+from datetime import datetime
 
-from sqlalchemy import ForeignKey, String, Date, Float
+from sqlalchemy import (
+    String,
+    Float,
+    Boolean,
+    ForeignKey,
+    DateTime,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database.session import Base
@@ -12,15 +18,24 @@ class Income(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id")
+        ForeignKey("users.id"),
+        nullable=False,
     )
 
-    source: Mapped[str] = mapped_column(String(100))
+    name: Mapped[str] = mapped_column(String(100))
 
     amount: Mapped[float] = mapped_column(Float)
 
-    date: Mapped[date] = mapped_column(Date)
+    category: Mapped[str] = mapped_column(String(50))
 
-    description: Mapped[str] = mapped_column(
-        String(250)
+    frequency: Mapped[str] = mapped_column(String(30))
+
+    is_passive: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
     )
