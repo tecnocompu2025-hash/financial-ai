@@ -1,18 +1,28 @@
 from datetime import date
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ExpenseCreate(BaseModel):
+    category: str = Field(min_length=1, max_length=100)
+    amount: float = Field(gt=0)
+    date: date
+    description: str = Field(min_length=1, max_length=250)
+
+
+class ExpenseUpdate(BaseModel):
+    category: str = Field(min_length=1, max_length=100)
+    amount: float = Field(gt=0)
+    date: date
+    description: str = Field(min_length=1, max_length=250)
+
+
+class ExpenseResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    user_id: int
     category: str
     amount: float
     date: date
     description: str
-
-
-class ExpenseResponse(ExpenseCreate):
-    id: int
-    user_id: int
-
-    class Config:
-        from_attributes = True

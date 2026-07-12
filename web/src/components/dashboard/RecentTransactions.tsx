@@ -3,30 +3,9 @@ import {
   IconArrowUpRight,
 } from "@tabler/icons-react";
 
-const transactions = [
-  {
-    title: "Salario",
-    amount: "+ S/ 3,500",
-    type: "income",
-  },
-  {
-    title: "Supermercado",
-    amount: "- S/ 280",
-    type: "expense",
-  },
-  {
-    title: "Internet",
-    amount: "- S/ 89",
-    type: "expense",
-  },
-  {
-    title: "Dividendos",
-    amount: "+ S/ 120",
-    type: "income",
-  },
-];
+type Transaction = { id: number; title: string; amount: number; type: "income" | "expense" };
 
-export default function RecentTransactions() {
+export default function RecentTransactions({ transactions }: { transactions: Transaction[] }) {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
 
@@ -36,10 +15,11 @@ export default function RecentTransactions() {
 
       <div className="space-y-5">
 
-        {transactions.map((item, index) => (
+        {transactions.length === 0 && <p className="text-slate-400">Aún no tienes movimientos registrados.</p>}
+        {transactions.map((item) => (
 
           <div
-            key={index}
+            key={`${item.type}-${item.id}`}
             className="flex items-center justify-between"
           >
 
@@ -62,7 +42,7 @@ export default function RecentTransactions() {
                   : "text-red-400"
               }
             >
-              {item.amount}
+              {item.type === "income" ? "+" : "-"} S/ {item.amount.toFixed(2)}
             </span>
 
           </div>

@@ -6,6 +6,8 @@ import {
   Target,
   BarChart3,
   Settings,
+  LogOut,
+  Landmark,
 } from "lucide-react";
 
 const menu = [
@@ -13,12 +15,13 @@ const menu = [
   { icon: Wallet, label: "Ingresos" },
   { icon: CreditCard, label: "Gastos" },
   { icon: TrendingUp, label: "Activos" },
+  { icon: Landmark, label: "Deudas" },
   { icon: Target, label: "Metas" },
   { icon: BarChart3, label: "Reportes" },
   { icon: Settings, label: "Configuración" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ userName, onLogout }: { userName: string; onLogout: () => void }) {
   return (
     <aside className="w-72 h-screen bg-slate-900 border-r border-slate-800 flex flex-col">
 
@@ -40,6 +43,32 @@ export default function Sidebar() {
           return (
             <button
               key={item.label}
+              onClick={() => {
+                if (item.label === "Dashboard") {
+                  window.location.assign("/");
+                }
+                if (item.label === "Ingresos") {
+                  window.location.assign("/income");
+                }
+                if (item.label === "Gastos") {
+                  window.location.assign("/expense");
+                }
+                if (item.label === "Activos") {
+                  window.location.assign("/assets");
+                }
+                if (item.label === "Deudas") {
+                  window.location.assign("/liabilities");
+                }
+                if (item.label === "Metas") {
+                  window.location.assign("/goals");
+                }
+                if (item.label === "Reportes") {
+                  window.location.assign("/reports");
+                }
+                if (item.label === "Configuración") {
+                  window.location.assign("/settings");
+                }
+              }}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white transition-all mb-2"
             >
               <Icon size={20} />
@@ -54,12 +83,17 @@ export default function Sidebar() {
       <div className="p-6 border-t border-slate-800">
 
         <div className="text-white font-semibold">
-          Rafael Ocanto
+          {userName}
         </div>
 
         <div className="text-slate-400 text-sm">
-          Founder
+          Miembro
         </div>
+
+        <button onClick={onLogout} className="mt-5 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white">
+          <LogOut size={20} />
+          Cerrar sesión
+        </button>
 
       </div>
 

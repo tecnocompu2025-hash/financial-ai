@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Header({ userName }: { userName: string }) {
   return (
     <header className="h-20 border-b border-slate-800 flex items-center justify-between px-8">
 
@@ -7,7 +7,7 @@ export default function Header() {
       </h2>
 
       <div>
-        Rafael
+        {userName}
       </div>
 
     </header>

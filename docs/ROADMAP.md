@@ -1,32 +1,58 @@
-# Roadmap Financial AI
+# Financial AI Roadmap
 
-## Fase 1
+# Fase 1 (Backend)
 
-✔ Login
+## Authentication
 
-✔ Registro
+✅ Registro
 
-✔ JWT
+✅ Login
 
-✔ Perfil financiero
+✅ JWT
 
----
-
-## Fase 2
-
-Ingresos
-
-Gastos
-
-Activos
-
-Pasivos
-
-Patrimonio
+✅ Perfil Financiero
 
 ---
 
-## Fase 3
+## Income
+
+✅ CRUD Completo
+
+---
+
+## Expense
+
+✅ CRUD Completo
+
+---
+
+## Assets
+
+✅ CRUD
+
+---
+
+## Liabilities
+
+✅ CRUD
+
+---
+
+## Net Worth
+
+✅ Cálculo Automático
+
+---
+
+# Fase 2
+
+Dashboard Profesional ✅
+
+✅ Reportes financieros
+
+✅ Metas financieras
+
+✅ Configuración de cuenta
 
 Cash Flow
 
@@ -40,26 +66,52 @@ Financial Freedom %
 
 ---
 
-## Fase 4
+# Fase 3
 
 Motor IA
 
-Analizar hábitos
+Análisis Financiero
 
-Encontrar gastos innecesarios
+Detección de malos hábitos
+
+Predicción de gastos
+
+Proyección patrimonial
 
 Plan de inversión
 
-Plan para jubilarse
-
-Proyección a 5,10,20 años
+Plan de jubilación
 
 ---
 
-## Inspiración
+# Fase 4
 
-Padre Rico Padre Pobre
+React Dashboard
 
-The Millionaire Next Door
+Gráficos
 
-The Psychology of Money
+Reportes
+
+Configuración
+
+Modo Oscuro
+
+Responsive
+
+---
+
+# Fase 5
+
+SaaS
+
+Stripe
+
+Planes
+
+Usuarios
+
+Empresas
+
+API Pública
+
+Aplicación móvil

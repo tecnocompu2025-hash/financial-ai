@@ -5,15 +5,17 @@ import AssetsCard from "./AssetsCard";
 import DebtsCard from "./DebtsCard";
 import CashFlowCard from "./CashFlowCard";
 
-export default function DashboardCards() {
+type Props = { incomeTotal: number; incomeCount: number; expenseTotal: number; expenseCount: number; assetTotal: number; liabilityTotal: number };
+
+export default function DashboardCards({ incomeTotal, incomeCount, expenseTotal, expenseCount, assetTotal, liabilityTotal }: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      <NetWorthCard />
-      <IncomeCards />
-      <ExpensesCards />
-      <AssetsCard />
-      <DebtsCard />
-      <CashFlowCard />
+      <NetWorthCard total={assetTotal - liabilityTotal} />
+      <IncomeCards total={incomeTotal} count={incomeCount} />
+      <ExpensesCards total={expenseTotal} count={expenseCount} />
+      <AssetsCard total={assetTotal} />
+      <DebtsCard total={liabilityTotal} />
+      <CashFlowCard total={incomeTotal - expenseTotal} />
     </div>
   );
 }

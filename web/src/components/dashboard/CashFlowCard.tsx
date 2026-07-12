@@ -1,13 +1,7 @@
-export default function CashFlowCard() {
-  return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-      <p className="text-slate-400 text-sm">
-        Flujo de Caja
-      </p>
+import FinancialCard from "./FinancialCard";
 
-      <h2 className="text-4xl font-bold mt-2">
-        S/ 0.00
-      </h2>
-    </div>
+export default function CashFlowCard({ total }: { total: number }) {
+  return (
+    <FinancialCard title="Flujo de caja" value={`S/ ${total.toFixed(2)}`} color={total >= 0 ? "text-cyan-400" : "text-red-400"} />
   );
 }

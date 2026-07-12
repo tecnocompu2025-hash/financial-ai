@@ -1,4 +1,4 @@
-export default function DebtsCard() {
+export default function DebtsCard({ total }: { total: number }) {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
       <p className="text-slate-400 text-sm">
@@ -6,7 +6,7 @@ export default function DebtsCard() {
       </p>
 
       <h2 className="text-4xl font-bold mt-2 text-red-400">
-        S/ 0.00
+        S/ {total.toFixed(2)}
       </h2>
     </div>
   );

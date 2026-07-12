@@ -1,80 +1,164 @@
 # Financial AI
 
-## Estado del proyecto
+# Estado del Proyecto
 
-Fecha:
-09/07/2026
-
----
-
-## Módulos terminados
-
-✔ FastAPI
-✔ PostgreSQL
-✔ SQLAlchemy
-✔ Alembic
-✔ JWT
-✔ Registro de usuarios
-✔ Login
-✔ Endpoint /auth/me
-✔ Autenticación Bearer
-✔ Modelo Profile
-✔ Migración profiles
+Fecha: 10/07/2026
 
 ---
 
-## Módulos creados
+# Sprint Actual
 
-app/models/profile.py
-
-app/schemas/profile.py
-
-app/repositories/profile_repository.py
-
-app/services/profile_service.py
-
-app/routers/profile.py
-
-app/dependencies/auth.py
+FA-004 - Expense Module
 
 ---
 
-## Funciona
+# Estado General
 
-POST /auth/register
+## Backend
 
-POST /auth/login
+✅ FastAPI
 
-GET /auth/me
+✅ PostgreSQL
 
----
+✅ SQLAlchemy
 
-## Error actual
+✅ Alembic
 
-POST /profile/
+✅ JWT Authentication
 
-Devuelve
-
-500 Internal Server Error
-
-Debe revisarse ProfileService o ProfileRepository.
+✅ Bearer Authentication
 
 ---
 
-## Próximo objetivo
+# Módulos Completados
 
-Corregir POST /profile.
+## Authentication
 
-Después crear:
+✅ Registro
 
-Income
+✅ Login
 
-Expense
+✅ Endpoint /auth/me
 
-Dashboard
+✅ JWT
 
-Financial Score
+✅ Protección de rutas
 
-Financial Freedom Engine
+---
 
-IA Asesor Financiero
+## Profile
+
+✅ Crear Perfil
+
+---
+
+## Income (CRUD Completo)
+
+✅ POST /income/
+
+✅ GET /income/
+
+✅ GET /income/{id}
+
+✅ PUT /income/{id}
+
+✅ DELETE /income/{id}
+
+---
+
+## Expense (CRUD Completo)
+
+✅ POST /expense/
+
+✅ GET /expense/
+
+✅ GET /expense/{id}
+
+✅ PUT /expense/{id}
+
+✅ DELETE /expense/{id}
+
+✅ Validación de datos y prueba integral contra la API local
+
+---
+
+# Base de Datos
+
+Tablas creadas
+
+✅ users
+
+✅ profiles
+
+✅ incomes
+
+✅ expenses
+
+---
+
+# Arquitectura
+
+Repository Pattern
+
+Service Layer
+
+Routers
+
+Schemas
+
+Models
+
+---
+
+# Frontend
+
+✅ React
+
+✅ TypeScript
+
+✅ Tailwind CSS
+
+⬜ Dashboard
+
+⬜ Sidebar Profesional
+
+⬜ Integración API
+
+---
+
+# Git
+
+Primer Commit Estable
+
+Commit:
+
+5ba963b
+
+Mensaje:
+
+v0.1 - Authentication, Profile and Income completed
+
+---
+
+# Próximo Sprint
+
+FA-005
+
+Dashboard Financiero
+
+---
+
+# Objetivo
+
+Completar el Dashboard Financiero con ingresos y gastos reales.
+Continuemos con Financial AI.
+
+Estado:
+- Último commit: 5ba963b
+- Authentication ✅
+- Profile ✅
+- Income CRUD ✅
+- Expense CRUD ✅
+- Próximo Sprint: FA-005 Dashboard Financiero
+
+Quiero continuar exactamente desde aquí.

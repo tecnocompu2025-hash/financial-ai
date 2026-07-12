@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError, jwt
@@ -9,6 +11,7 @@ from app.models.user import User
 from app.repositories.user_repository import UserRepository
 
 security = HTTPBearer()
+logger = logging.getLogger(__name__)
 
 
 def get_current_user(
@@ -28,7 +31,8 @@ def get_current_user(
 
         user_id = int(payload.get("sub"))
 
-    except JWTError:
+    except JWTError as exc:
+        logger.warning("JWT rechazado: %s", exc)
         raise HTTPException(
             status_code=401,
             detail="Token inválido",

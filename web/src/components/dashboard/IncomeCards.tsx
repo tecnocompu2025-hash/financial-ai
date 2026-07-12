@@ -1,11 +1,12 @@
 import FinancialCard from "./FinancialCard";
 
-export default function IncomeCards() {
+export default function IncomeCards({ total, count }: { total: number; count: number }) {
   return (
     <FinancialCard
-      title="Ingresos Mensuales"
-      value="S/ 0.00"
-      subtitle="Sin registros"
+      title="Ingresos registrados"
+      value={`S/ ${total.toFixed(2)}`}
+      subtitle={`${count} ${count === 1 ? "registro" : "registros"}`}
+      color="text-green-400"
     />
   );
 }
