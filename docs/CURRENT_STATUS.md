@@ -35,7 +35,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 - Las metas no tienen columnas separadas para categoría ni fecha; la categoría visual se conserva en el nombre por compatibilidad.
 - Existen componentes de frontend heredados excluidos de la compilación que requieren limpieza controlada.
 - `FRONTEND_COMPONENTS.md` identifica las versiones activas y las heredadas excluidas para que esa limpieza sea verificable.
-- La cobertura de pruebas no es todavía integral para todos los flujos visuales, pero incluye validaciones de reportes, filtros por tipo y generación de exportaciones.
+- La cobertura de pruebas no es todavía integral para todos los flujos visuales, pero incluye validaciones de reportes, filtros por tipo, generación de exportaciones y recuperación de contraseña en frontend.
 
 ## Módulos y rutas
 
