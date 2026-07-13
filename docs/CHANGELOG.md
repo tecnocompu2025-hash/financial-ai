@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-07-13 - Release preparation
+
+- Created local source and PostgreSQL backups before Git synchronization.
+- Documented VPS deployment requirements and current release status.
+
 ## 2026-07-12 â€” Reportes e indicadores financieros
 
 - Nuevo endpoint de reporte filtrable y visualizaciones interactivas.

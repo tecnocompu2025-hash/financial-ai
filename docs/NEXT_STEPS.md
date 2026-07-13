@@ -1,5 +1,12 @@
 # Next Steps
 
+## Deployment priority
+
+1. Deploy on a VPS; shared hosting is not enough for FastAPI and PostgreSQL.
+2. Set production environment variables and never commit `.env` files or SMTP passwords.
+3. Point the domain to the VPS, enable HTTPS, and set the production frontend/API URLs.
+4. Test login, password recovery, reports and exports from the public domain.
+
 1. Añadir pruebas de integración HTTP para autenticación, permisos y CRUD financiero.
 2. Añadir filtros por fecha y exportación de reportes.
 3. Retirar componentes heredados después de confirmar que no existan referencias externas.

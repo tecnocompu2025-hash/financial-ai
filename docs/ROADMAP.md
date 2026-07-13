@@ -1,5 +1,12 @@
 # Financial AI Roadmap
 
+## Next release - VPS deployment
+
+1. Provision a VPS with Ubuntu and SSH access.
+2. Configure Docker/Nginx or system services for FastAPI, PostgreSQL and the React build.
+3. Configure domain DNS, HTTPS, production `VITE_API_URL`, CORS and Gmail SMTP.
+4. Add HTTP integration and frontend component tests before public launch.
+
 ## Cierre de mejora técnica — 2026-07-12
 
 - Completados formularios visuales prioritarios, pruebas unitarias iniciales, configuración de Docker por entorno y reportes detallados.

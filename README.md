@@ -4,6 +4,13 @@ SaaS financiero personal para registrar ingresos, gastos, activos, deudas, créd
 
 Stack: FastAPI, SQLAlchemy, Alembic, PostgreSQL, JWT, React, Vite, TypeScript y Tailwind CSS.
 
+## Deployment status
+
+The application is ready for VPS deployment: FastAPI, PostgreSQL, React build,
+JWT authentication, financial modules, filtered reports, exports, and password
+recovery are implemented. Production deployment still requires configuring the
+public domain, `VITE_API_URL`, CORS, SMTP, HTTPS, and server secrets.
+
 ## Inicio local
 
 ```powershell
