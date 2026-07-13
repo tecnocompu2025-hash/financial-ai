@@ -8,6 +8,7 @@
 - Se agregó la pantalla web de confirmación de recuperación de contraseña y su ruta pública.
 - Se añadió una prueba de esquema para contraseñas de restablecimiento débiles o no coincidentes.
 - La exportación incorpora hojas de evolución, indicadores y recomendaciones; se validan formatos PDF/XLSX en pruebas backend.
+- Se corrigió el límite final de fecha de ingresos y se añadieron pruebas de cálculos y filtro por tipo de los reportes.
 
 ## Repositorio
 

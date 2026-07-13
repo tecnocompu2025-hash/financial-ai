@@ -53,7 +53,7 @@ class ReportRepository:
         if filters.date_from:
             query = query.filter(Income.created_at >= datetime.combine(filters.date_from, time.min))
         if filters.date_to:
-            query = query.filter(Income.created_at < datetime.combine(filters.date_to, time.max))
+            query = query.filter(Income.created_at <= datetime.combine(filters.date_to, time.max))
         return query
 
     @staticmethod
