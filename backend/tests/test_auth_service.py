@@ -21,11 +21,11 @@ class AuthServiceTests(unittest.TestCase):
         self.service.repository = FakeRepository()
 
     def test_register_hashes_the_password(self):
-        user = self.service.register("Usuario", "user@example.com", "clave-prueba")
-        self.assertNotEqual(user.password, "clave-prueba")
-        self.assertTrue(verify_password("clave-prueba", user.password))
+        user = self.service.register("Usuario", "user@example.com", "ClavePrueba123")
+        self.assertNotEqual(user.password, "ClavePrueba123")
+        self.assertTrue(verify_password("ClavePrueba123", user.password))
 
     def test_duplicate_email_is_rejected(self):
-        self.service.register("Usuario", "user@example.com", "clave-prueba")
+        self.service.register("Usuario", "user@example.com", "ClavePrueba123")
         with self.assertRaises(Exception):
-            self.service.register("Otro", "user@example.com", "otra-clave")
+            self.service.register("Otro", "user@example.com", "OtraClave123")

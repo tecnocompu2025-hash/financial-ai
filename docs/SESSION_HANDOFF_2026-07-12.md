@@ -11,6 +11,7 @@
 - Se corrigió el límite final de fecha de ingresos y se añadieron pruebas de cálculos y filtro por tipo de los reportes.
 - El perfil dispone de actualización autenticada mediante `PUT /profile/`, con pruebas de servicio.
 - Se añadieron validaciones y pruebas de esquema para los campos financieros del perfil.
+- El registro de usuarios valida nombre y contraseña segura; se añadieron pruebas de esquema.
 
 ## Repositorio
 

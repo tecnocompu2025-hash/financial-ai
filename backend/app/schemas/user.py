@@ -2,9 +2,15 @@ from pydantic import BaseModel, EmailStr, Field, model_validator
 
 
 class UserRegister(BaseModel):
-    name: str
+    name: str = Field(min_length=2, max_length=100)
     email: EmailStr
-    password: str
+    password: str = Field(min_length=8, max_length=128)
+
+    @model_validator(mode="after")
+    def password_is_secure(self):
+        if not any(character.isdigit() for character in self.password) or not any(character.isalpha() for character in self.password):
+            raise ValueError("Password must include letters and numbers")
+        return self
 
 
 class UserLogin(BaseModel):
