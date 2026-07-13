@@ -13,6 +13,7 @@
 - Se añadieron validaciones y pruebas de esquema para los campos financieros del perfil.
 - El registro de usuarios valida nombre y contraseña segura; se añadieron pruebas de esquema.
 - Se configuró Vitest para frontend y se añadieron pruebas del formulario de recuperación de contraseña.
+- La recuperación de contraseña usa respuesta neutra ante falta o fallo de SMTP y fechas UTC compatibles con el esquema actual.
 
 ## Repositorio
 
