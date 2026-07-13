@@ -1,4 +1,4 @@
-import Sidebar from "../dashboard/Sidebar";
+import SidebarV2 from "../dashboard/SidebarV2";
 import Header from "../dashboard/Header";
 import { formatName } from "../../utils/formatName";
 
@@ -14,7 +14,7 @@ export default function Layout({ children, userName, onLogout }: Props) {
   return (
     <div className="flex h-screen bg-slate-950 text-white">
 
-      <Sidebar userName={displayName} onLogout={onLogout} />
+      <SidebarV2 userName={displayName} onLogout={onLogout} />
 
       <div className="flex flex-col flex-1">
 

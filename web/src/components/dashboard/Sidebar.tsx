@@ -9,6 +9,7 @@ import {
   LogOut,
   Landmark,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const menu = [
   { icon: LayoutDashboard, label: "Dashboard" },
@@ -16,12 +17,15 @@ const menu = [
   { icon: CreditCard, label: "Gastos" },
   { icon: TrendingUp, label: "Activos" },
   { icon: Landmark, label: "Deudas" },
+  { icon: Landmark, label: "Pagos" },
+  { icon: Landmark, label: "Editar créditos" },
   { icon: Target, label: "Metas" },
   { icon: BarChart3, label: "Reportes" },
   { icon: Settings, label: "Configuración" },
 ];
 
 export default function Sidebar({ userName, onLogout }: { userName: string; onLogout: () => void }) {
+  const navigate = useNavigate();
   return (
     <aside className="w-72 h-screen bg-slate-900 border-r border-slate-800 flex flex-col">
 
@@ -45,28 +49,34 @@ export default function Sidebar({ userName, onLogout }: { userName: string; onLo
               key={item.label}
               onClick={() => {
                 if (item.label === "Dashboard") {
-                  window.location.assign("/");
+                  navigate("/");
                 }
                 if (item.label === "Ingresos") {
-                  window.location.assign("/income");
+                  navigate("/income");
                 }
                 if (item.label === "Gastos") {
-                  window.location.assign("/expense");
+                  navigate("/expense");
                 }
                 if (item.label === "Activos") {
-                  window.location.assign("/assets");
+                  navigate("/assets");
                 }
                 if (item.label === "Deudas") {
-                  window.location.assign("/liabilities");
+                  navigate("/debts");
+                }
+                if (item.label === "Pagos") {
+                  navigate("/payments");
+                }
+                if (item.label === "Editar créditos") {
+                  navigate("/credit-edit");
                 }
                 if (item.label === "Metas") {
-                  window.location.assign("/goals");
+                  navigate("/goals");
                 }
                 if (item.label === "Reportes") {
-                  window.location.assign("/reports");
+                  navigate("/reports");
                 }
                 if (item.label === "Configuración") {
-                  window.location.assign("/settings");
+                  navigate("/settings");
                 }
               }}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white transition-all mb-2"

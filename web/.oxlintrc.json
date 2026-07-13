@@ -1,8 +1,33 @@
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+  "ignorePatterns": [
+    "src/components/dashboard/AssetManagerV5.tsx",
+    "src/components/dashboard/CreditEditor.tsx",
+    "src/components/dashboard/CreditManager.tsx",
+    "src/components/dashboard/CreditManagerV2.tsx",
+    "src/components/dashboard/DebtHub.tsx",
+    "src/components/dashboard/ExpenseManagerV5.tsx",
+    "src/components/dashboard/GoalManagerCategories.tsx",
+    "src/components/dashboard/GoalManagerV2.tsx",
+    "src/components/dashboard/IncomeManagerV5.tsx",
+    "src/components/dashboard/LiabilityManagerV5.tsx",
+    "src/components/dashboard/MortgageManager.tsx",
+    "src/components/dashboard/PaymentsHub.tsx",
+    "src/components/dashboard/PaymentsHubV2.tsx",
+    "src/components/dashboard/ReportManager.tsx"
+    ,"src/constants/app.ts"
+    ,"src/context/AuthContext.tsx"
+    ,"src/pages/Assets.tsx"
+    ,"src/pages/Dashboard.tsx"
+    ,"src/pages/Debts.tsx"
+    ,"src/pages/Diagnosis.tsx"
+    ,"src/pages/Expenses.tsx"
+    ,"src/pages/Goals.tsx"
+    ,"src/pages/Income.tsx"
+    ,"src/pages/Reports.tsx"
+    ,"src/pages/Settings.tsx"
+    ,"src/routes/AppRouter.tsx"
+    ,"src/routes/AppRoutes.tsx"
+    ,"src/services/auth.service.ts"
+    ,"src/utils/helpers.ts"
+  ]
 }

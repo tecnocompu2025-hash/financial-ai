@@ -10,30 +10,28 @@ import RecentTransactions from "../../components/dashboard/RecentTransactions";
 
 import WealthChart from "../../components/charts/WealthChart";
 import { ApiError } from "../../services/api";
-import { getAssets, getCurrentUser, getExpenses, getGoals, getIncomes, getLiabilities } from "../../services/financial.service";
-import type { Asset, Expense, Goal, Income, Liability, User } from "../../types/financial";
+import { getCurrentUser, getDashboardSummary, getExpenses, getGoals, getIncomes } from "../../services/financial.service";
+import type { DashboardSummary, Expense, Goal, Income, User } from "../../types/financial";
 
 type Props = { token: string; onLogout: () => void };
 
 export default function Dashboard({ token, onLogout }: Props) {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [liabilities, setLiabilities] = useState<Liability[]>([]);
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([getCurrentUser(token), getIncomes(token), getExpenses(token), getAssets(token), getLiabilities(token), getGoals(token)])
-      .then(([userData, incomeData, expenseData, assetData, liabilityData, goalData]) => {
+    Promise.all([getCurrentUser(token), getIncomes(token), getExpenses(token), getGoals(token), getDashboardSummary(token)])
+      .then(([userData, incomeData, expenseData, goalData, summaryData]) => {
         setUser(userData);
         setIncomes(incomeData);
         setExpenses(expenseData);
-        setAssets(assetData);
-        setLiabilities(liabilityData);
         setGoals(goalData);
+        setSummary(summaryData);
       })
       .catch((err: unknown) => {
         if (err instanceof ApiError && err.status === 401) onLogout();
@@ -42,14 +40,14 @@ export default function Dashboard({ token, onLogout }: Props) {
       .finally(() => setLoading(false));
   }, [token, onLogout]);
 
-  const incomeTotal = incomes.reduce((sum, item) => sum + item.amount, 0);
-  const expenseTotal = expenses.reduce((sum, item) => sum + item.amount, 0);
-  const assetTotal = assets.reduce((sum, item) => sum + item.value, 0);
-  const liabilityTotal = liabilities.reduce((sum, item) => sum + item.balance, 0);
-  const netWorth = assetTotal - liabilityTotal;
+  const incomeTotal = summary?.income_total ?? 0;
+  const expenseTotal = summary?.expense_total ?? 0;
+  const assetTotal = summary?.asset_total ?? 0;
+  const liabilityTotal = summary?.liability_total ?? 0;
+  const netWorth = summary?.net_worth ?? 0;
   const debtRate = assetTotal > 0 ? liabilityTotal / assetTotal * 100 : 0;
-  const cashFlow = incomeTotal - expenseTotal;
-  const savingsRate = incomeTotal > 0 ? (cashFlow / incomeTotal) * 100 : 0;
+  const cashFlow = summary?.cash_flow ?? 0;
+  const savingsRate = summary?.savings_rate ?? 0;
   const transactions = [
     ...incomes.map((item) => ({ id: item.id, title: item.name, amount: item.amount, type: "income" as const })),
     ...expenses.map((item) => ({ id: item.id, title: item.description || item.category, amount: item.amount, type: "expense" as const })),

@@ -1,0 +1,6 @@
+import { useNavigate } from "react-router-dom";
+
+export default function PaymentsHub() {
+  const navigate = useNavigate();
+  return <main className="min-h-screen bg-slate-950 p-8 text-white"><button onClick={() => navigate("/")} className="text-cyan-400">Dashboard</button><h1 className="mt-5 text-3xl font-bold">Pagos</h1><p className="mt-2 text-slate-400">Gestiona créditos, cuotas pagadas y la proyección de amortización.</p><div className="mt-8 grid max-w-3xl gap-4 md:grid-cols-3"><button onClick={() => navigate("/mortgages")} className="rounded-xl bg-slate-900 p-6 text-left hover:bg-slate-800"><b>Créditos</b><p className="mt-2 text-sm text-slate-400">Hipotecario, vehicular, personal, empresarial y tarjetas.</p></button><button onClick={() => navigate("/credit-history")} className="rounded-xl bg-slate-900 p-6 text-left hover:bg-slate-800"><b>Cuotas</b><p className="mt-2 text-sm text-slate-400">Registra pagos y consulta su historial.</p></button><button onClick={() => navigate("/amortization")} className="rounded-xl bg-slate-900 p-6 text-left hover:bg-slate-800"><b>Amortización</b><p className="mt-2 text-sm text-slate-400">Proyección de interés, capital y saldo.</p></button></div></main>;
+}
