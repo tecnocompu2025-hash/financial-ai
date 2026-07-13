@@ -6,6 +6,7 @@
 - El listado administrativo de usuarios usa `UserRepository` mediante `AuthService`.
 - El total de activos productivos de reportes se consulta mediante `ReportRepository`.
 - Se agregó la pantalla web de confirmación de recuperación de contraseña y su ruta pública.
+- Se añadió una prueba de esquema para contraseñas de restablecimiento débiles o no coincidentes.
 
 ## Repositorio
 

@@ -37,6 +37,12 @@ class PasswordResetConfirm(BaseModel):
         if self.new_password != self.confirm_password: raise ValueError("Las contraseñas nuevas no coinciden")
         return self
 
+    @model_validator(mode="after")
+    def password_is_secure(self):
+        if not any(character.isdigit() for character in self.new_password) or not any(character.isalpha() for character in self.new_password):
+            raise ValueError("Password must include letters and numbers")
+        return self
+
 
 class UserResponse(BaseModel):
     id: int
