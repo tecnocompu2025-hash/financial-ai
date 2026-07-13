@@ -20,13 +20,10 @@ def create_profile(
     db: Session = Depends(get_db),
 ):
     service = ProfileService(db)
-
-    new_profile = service.create(
-        current_user.id,
-        profile,
-    )
-
-    return new_profile
+    try:
+        return service.create(current_user.id, profile)
+    except ValueError as error:
+        raise HTTPException(status_code=409, detail=str(error)) from error
 
 
 @router.get("/", response_model=ProfileResponse | None)

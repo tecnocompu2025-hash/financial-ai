@@ -11,7 +11,7 @@ class ProfileService:
         profile = self.repository.get_by_user(user_id)
 
         if profile:
-            raise Exception("El perfil ya existe.")
+            raise ValueError("El perfil ya existe.")
 
         return self.repository.create(
             user_id,
