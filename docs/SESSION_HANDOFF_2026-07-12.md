@@ -5,6 +5,7 @@
 - Los reportes exportados reciben los filtros activos desde el frontend y el backend.
 - El listado administrativo de usuarios usa `UserRepository` mediante `AuthService`.
 - El total de activos productivos de reportes se consulta mediante `ReportRepository`.
+- Se agregó la pantalla web de confirmación de recuperación de contraseña y su ruta pública.
 
 ## Repositorio
 

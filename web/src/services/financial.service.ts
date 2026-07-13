@@ -9,6 +9,7 @@ export function register(name: string, email: string, password: string) {
   return apiRequest<{ message: string }>("/auth/register", undefined, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, password }) });
 }
 export const requestPasswordReset = (email: string) => apiRequest<{ message: string }>("/auth/password-reset/request", undefined, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+export const confirmPasswordReset = (token: string, new_password: string, confirm_password: string) => apiRequest<{ message: string }>("/auth/password-reset/confirm", undefined, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token, new_password, confirm_password }) });
 
 export const getIncomes = (token: string) => apiRequest<Income[]>("/income/", token);
 export const getExpenses = (token: string) => apiRequest<Expense[]>("/expense/", token);

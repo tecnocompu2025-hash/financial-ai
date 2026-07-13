@@ -18,6 +18,7 @@ import CreditEditorV2 from "./components/dashboard/CreditEditorV2";
 import CustomCreditManager from "./components/dashboard/CustomCreditManager";
 import AdminUsers from "./components/dashboard/AdminUsers";
 import AllDebts from "./components/dashboard/AllDebts";
+import ResetPasswordForm from "./components/auth/ResetPasswordForm";
 
 const TOKEN_KEY = "financial_ai_access_token";
 
@@ -25,7 +26,10 @@ function App() {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY));
   const [isSuperuser, setIsSuperuser] = useState(false);
   useEffect(() => { if (token) void getCurrentUser(token).then((user) => setIsSuperuser(Boolean(user.is_superuser))).catch(() => setIsSuperuser(false)); }, [token]);
-  if (!token) return <LoginForm onLogin={(value) => { localStorage.setItem(TOKEN_KEY, value); setToken(value); }} />;
+  if (!token) return <Routes>
+    <Route path="/reset-password" element={<ResetPasswordForm />} />
+    <Route path="*" element={<LoginForm onLogin={(value) => { localStorage.setItem(TOKEN_KEY, value); setToken(value); }} />} />
+  </Routes>;
   const logout = () => { localStorage.removeItem(TOKEN_KEY); setToken(null); };
   return <Routes>
     <Route path="/" element={isSuperuser ? <Navigate to="/admin/users" replace /> : <Dashboard token={token} onLogout={logout} />} />
