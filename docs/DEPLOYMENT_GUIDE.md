@@ -9,6 +9,6 @@ Financial AI está preparado para una futura VPS Linux, pero no está desplegado
 5. Configure el proxy público y HTTPS con Nginx/Let's Encrypt en la VPS, o adapte el puerto 80 del servicio web a su proxy existente.
 6. Compruebe `/api/health`, registro, inicio de sesión, reportes, exportación y recuperación de contraseña desde el dominio real.
 
-`docker-compose.production.yml` incluye PostgreSQL persistente, API FastAPI y frontend Nginx. El frontend usa `/api` internamente, por lo que no necesita exponer el puerto del API al público.
+`docker-compose.production.yml` incluye PostgreSQL persistente, API FastAPI y frontend Nginx. PostgreSQL y API tienen controles de salud; el frontend espera al API saludable. El frontend usa `/api` internamente, por lo que no necesita exponer el puerto del API al público.
 
 No se deben declarar los servicios como desplegados hasta verificar el servidor, dominio, HTTPS y SMTP.
