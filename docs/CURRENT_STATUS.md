@@ -2,6 +2,8 @@
 
 Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o con problemas de codificación de otros documentos. La fuente de verdad es el código, las migraciones y las pruebas ejecutadas.
 
+Última verificación local: 2026-07-13 — 24 pruebas backend, 2 pruebas frontend, lint, build web y configuración de Docker Compose correctos. No existe despliegue público ni push nuevo a GitHub en esta sesión.
+
 ## Implementado
 
 - Autenticación JWT: registro, inicio de sesión, usuario actual, cambio de contraseña y recuperación mediante token de un solo uso.
