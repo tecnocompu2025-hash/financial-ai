@@ -14,7 +14,7 @@ export default function SettingsManagerV2({ token }: { token: string }) {
   useEffect(() => {
     void getCurrentUser(token).then(setUser);
     void getProfile(token).then((value) => {
-      if (value) { const { id, ...data } = value; setProfile(data); setProfileExists(true); }
+      if (value) { const { id: _id, ...data } = value; setProfile(data); setProfileExists(true); }
     });
   }, [token]);
 

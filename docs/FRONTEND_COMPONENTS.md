@@ -4,7 +4,7 @@ La fuente de verdad de navegación es `web/src/App.tsx`.
 
 ## Activos
 
-- `LoginFormV2` y `ResetPasswordForm`.
+- `LoginFormV3` y `ResetPasswordForm`.
 - `Dashboard`.
 - `IncomeManagerV7`, `ExpenseManagerV6`, `AssetManagerV6`, `LiabilityManagerV7` y `GoalManagerV3`.
 - `DebtHubV2`, `AllDebts`, `CreditEditorV2`, `CustomCreditManager`, `CreditManagerV3`, `AmortizationManager` y `PaymentsHubV3`.
