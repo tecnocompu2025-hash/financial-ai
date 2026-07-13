@@ -12,6 +12,7 @@ from app.routers.goal import router as goal_router
 from app.routers.dashboard import router as dashboard_router
 from app.routers.mortgage import router as mortgage_router
 from app.routers.report import router as report_router
+from app.core.config import settings
 
 app = FastAPI(
     title="Financial AI",
@@ -20,14 +21,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-    ],
+    allow_origins=settings.cors_origins,
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_credentials=True,
     allow_methods=["*"],

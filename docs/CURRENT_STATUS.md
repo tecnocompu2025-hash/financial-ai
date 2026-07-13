@@ -25,6 +25,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 ## Pendiente o limitado
 
 - No existe despliegue de producción, VPS, dominio ni HTTPS configurados.
+- El backend acepta `CORS_ORIGINS` y `FRONTEND_URL` desde variables de entorno para el futuro dominio.
 - El envío de recuperación requiere SMTP configurado y probado desde el proceso backend del entorno objetivo.
 - El fondo de emergencia usa activos registrados como disponibilidad: el modelo no diferencia activos líquidos.
 - Las metas no tienen columnas separadas para categoría ni fecha; la categoría visual se conserva en el nombre por compatibilidad.
