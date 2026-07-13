@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
@@ -6,6 +6,7 @@ from app.dependencies.auth import get_current_user
 from app.models.user import User
 from app.schemas.income import (
     IncomeCreate,
+    IncomeResponse,
     IncomeUpdate,
 )
 from app.services.income_service import IncomeService
@@ -16,7 +17,7 @@ router = APIRouter(
 )
 
 
-@router.post("/")
+@router.post("/", response_model=IncomeResponse, status_code=status.HTTP_201_CREATED)
 def create_income(
     income: IncomeCreate,
     current_user: User = Depends(get_current_user),
@@ -30,7 +31,7 @@ def create_income(
     )
 
 
-@router.get("/")
+@router.get("/", response_model=list[IncomeResponse])
 def get_incomes(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -40,7 +41,7 @@ def get_incomes(
     return service.get_all(current_user.id)
 
 
-@router.get("/{income_id}")
+@router.get("/{income_id}", response_model=IncomeResponse)
 def get_income(
     income_id: int,
     current_user: User = Depends(get_current_user),
@@ -54,7 +55,7 @@ def get_income(
     )
 
 
-@router.put("/{income_id}")
+@router.put("/{income_id}", response_model=IncomeResponse)
 def update_income(
     income_id: int,
     income: IncomeUpdate,

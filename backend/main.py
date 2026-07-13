@@ -9,6 +9,8 @@ from app.routers.expense import router as expense_router
 from app.routers.asset import router as asset_router
 from app.routers.liability import router as liability_router
 from app.routers.goal import router as goal_router
+from app.routers.dashboard import router as dashboard_router
+from app.routers.mortgage import router as mortgage_router
 
 app = FastAPI(
     title="Financial AI",
@@ -36,6 +38,8 @@ app.include_router(expense_router)
 app.include_router(asset_router)
 app.include_router(liability_router)
 app.include_router(goal_router)
+app.include_router(dashboard_router)
+app.include_router(mortgage_router)
 
 
 @app.get("/")

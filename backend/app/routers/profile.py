@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.database.session import get_db
 from app.dependencies.auth import get_current_user
 from app.models.user import User
-from app.schemas.profile import ProfileCreate
+from app.schemas.profile import ProfileCreate, ProfileResponse
 from app.services.profile_service import ProfileService
 
 router = APIRouter(
@@ -13,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.post("/")
+@router.post("/", response_model=ProfileResponse)
 def create_profile(
     profile: ProfileCreate,
     current_user: User = Depends(get_current_user),
@@ -21,8 +21,6 @@ def create_profile(
 ):
     print("\n======================================")
     print("ENTRÉ AL ENDPOINT /profile")
-    print("Usuario ID:", current_user.id)
-    print("Datos recibidos:", profile)
     print("======================================\n")
 
     service = ProfileService(db)
@@ -32,13 +30,10 @@ def create_profile(
         profile,
     )
 
-    return {
-        "message": "Perfil creado correctamente.",
-        "profile": new_profile,
-    }
+    return new_profile
 
 
-@router.get("/")
+@router.get("/", response_model=ProfileResponse | None)
 def get_profile(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

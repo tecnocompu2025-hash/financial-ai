@@ -16,7 +16,7 @@ class ProfileRepository:
 
             profile = Profile(
                 user_id=user_id,
-                **data.dict()
+                **data.model_dump()
             )
 
             print("✅ PASO 1 - Objeto Profile creado")

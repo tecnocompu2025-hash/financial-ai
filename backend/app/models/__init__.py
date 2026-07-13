@@ -5,3 +5,5 @@ from .expense import Expense
 from .asset import Asset
 from .liability import Liability
 from .goal import Goal
+from .mortgage import Mortgage
+from .credit_payment import CreditPayment

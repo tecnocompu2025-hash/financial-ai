@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.database.session import get_db
 from app.schemas.user import UserRegister, UserLogin
 from app.services.auth_service import AuthService
-from app.dependencies.auth import get_current_user
+from app.dependencies.auth import get_current_superuser, get_current_user
 from app.models.user import User
 
 router = APIRouter(
@@ -80,4 +80,9 @@ def me(
         "id": current_user.id,
         "name": current_user.name,
         "email": current_user.email,
+        "is_superuser": current_user.is_superuser,
     }
+
+@router.get("/users")
+def users(current_user: User = Depends(get_current_superuser), db: Session = Depends(get_db)):
+    return [{"id": user.id, "name": user.name, "email": user.email} for user in db.query(User).order_by(User.id).all()]

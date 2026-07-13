@@ -18,3 +18,4 @@ class User(Base):
     )
 
     password: Mapped[str] = mapped_column(String(255))
+    is_superuser: Mapped[bool] = mapped_column(default=False, nullable=False)

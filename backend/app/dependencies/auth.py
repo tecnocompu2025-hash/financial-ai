@@ -31,7 +31,7 @@ def get_current_user(
 
         user_id = int(payload.get("sub"))
 
-    except JWTError as exc:
+    except (JWTError, TypeError, ValueError) as exc:
         logger.warning("JWT rechazado: %s", exc)
         raise HTTPException(
             status_code=401,
@@ -49,3 +49,9 @@ def get_current_user(
         )
 
     return user
+
+
+def get_current_superuser(current_user: User = Depends(get_current_user)) -> User:
+    if not current_user.is_superuser:
+        raise HTTPException(status_code=403, detail="Acceso solo para administradores")
+    return current_user

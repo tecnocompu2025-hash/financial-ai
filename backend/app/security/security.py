@@ -15,9 +15,6 @@ ALGORITHM = settings.ALGORITHM
 
 
 def hash_password(password: str) -> str:
-    print("PASSWORD:", password)
-    print("TIPO:", type(password))
-    print("LONGITUD:", len(password))
     return pwd_context.hash(password)
 
 
