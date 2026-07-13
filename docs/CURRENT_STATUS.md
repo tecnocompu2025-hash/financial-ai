@@ -16,6 +16,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 - Clasificación de gastos esenciales, activos productivos/no productivos y pasivos buenos/malos.
 - Frontend React/Vite para los módulos activos.
 - Configuración permite crear o actualizar el perfil financiero, cambiar contraseña y cerrar sesión.
+- El perfil valida edades, edad de retiro, hijos, ingreso mensual y campos requeridos en backend.
 
 ## Verificado localmente
 

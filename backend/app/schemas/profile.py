@@ -1,15 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, model_validator
 
 
 class ProfileCreate(BaseModel):
-    country: str
-    currency: str
-    age: int
-    marital_status: str
-    children: int
-    retirement_age: int
-    financial_goal: str
-    monthly_salary: float
+    country: str = Field(min_length=2, max_length=100)
+    currency: str = Field(min_length=1, max_length=10)
+    age: int = Field(ge=18, le=120)
+    marital_status: str = Field(min_length=1, max_length=50)
+    children: int = Field(ge=0, le=50)
+    retirement_age: int = Field(ge=18, le=120)
+    financial_goal: str = Field(min_length=1, max_length=255)
+    monthly_salary: float = Field(ge=0)
+
+    @model_validator(mode="after")
+    def retirement_must_follow_current_age(self):
+        if self.retirement_age < self.age:
+            raise ValueError("La edad de retiro no puede ser menor que la edad actual")
+        return self
 
 
 class ProfileResponse(ProfileCreate):
