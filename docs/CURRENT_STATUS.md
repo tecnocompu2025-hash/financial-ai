@@ -7,6 +7,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 - Autenticación JWT: registro, inicio de sesión, usuario actual, cambio de contraseña y recuperación mediante token de un solo uso.
 - Recuperación de contraseña: la ruta web `/reset-password?token=...` permite completar el restablecimiento desde el enlace enviado por correo.
 - Las solicitudes de restablecimiento validan confirmación, longitud mínima, letras y números en frontend y backend.
+- Al recargar la aplicación con un token JWT vencido, la interfaz elimina la sesión local y vuelve al inicio de sesión.
 - Perfil: creación y consulta.
 - CRUD autenticado de ingresos, gastos, activos, pasivos, metas y créditos.
 - Pagos, historial y amortización estimada de créditos.

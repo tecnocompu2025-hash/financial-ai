@@ -19,10 +19,6 @@ def create_profile(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    print("\n======================================")
-    print("ENTRÉ AL ENDPOINT /profile")
-    print("======================================\n")
-
     service = ProfileService(db)
 
     new_profile = service.create(

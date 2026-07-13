@@ -19,13 +19,26 @@ import CustomCreditManager from "./components/dashboard/CustomCreditManager";
 import AdminUsers from "./components/dashboard/AdminUsers";
 import AllDebts from "./components/dashboard/AllDebts";
 import ResetPasswordForm from "./components/auth/ResetPasswordForm";
+import { ApiError } from "./services/api";
 
 const TOKEN_KEY = "financial_ai_access_token";
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY));
   const [isSuperuser, setIsSuperuser] = useState(false);
-  useEffect(() => { if (token) void getCurrentUser(token).then((user) => setIsSuperuser(Boolean(user.is_superuser))).catch(() => setIsSuperuser(false)); }, [token]);
+  useEffect(() => {
+    if (!token) return;
+    void getCurrentUser(token)
+      .then((user) => setIsSuperuser(Boolean(user.is_superuser)))
+      .catch((error: unknown) => {
+        if (error instanceof ApiError && error.status === 401) {
+          localStorage.removeItem(TOKEN_KEY);
+          setToken(null);
+          return;
+        }
+        setIsSuperuser(false);
+      });
+  }, [token]);
   if (!token) return <Routes>
     <Route path="/reset-password" element={<ResetPasswordForm />} />
     <Route path="*" element={<LoginForm onLogin={(value) => { localStorage.setItem(TOKEN_KEY, value); setToken(value); }} />} />
