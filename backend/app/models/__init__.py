@@ -7,3 +7,4 @@ from .liability import Liability
 from .goal import Goal
 from .mortgage import Mortgage
 from .credit_payment import CreditPayment
+from .password_reset_token import PasswordResetToken

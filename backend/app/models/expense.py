@@ -1,6 +1,6 @@
 from datetime import date
 
-from sqlalchemy import Date, Float, ForeignKey, String
+from sqlalchemy import Boolean, Date, Float, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database.session import Base
@@ -24,3 +24,5 @@ class Expense(Base):
     description: Mapped[str] = mapped_column(
         String(250)
     )
+
+    is_essential: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)

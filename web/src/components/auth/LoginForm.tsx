@@ -1,49 +1,5 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { ApiError } from "../../services/api";
-import { login, register } from "../../services/financial.service";
-
+import { login, register, requestPasswordReset } from "../../services/financial.service";
 type Props = { onLogin: (token: string) => void };
-
-export default function LoginForm({ onLogin }: Props) {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      if (isRegistering) {
-        await register(name, email, password);
-        setIsRegistering(false);
-        setError("Cuenta creada. Ahora inicia sesión.");
-      } else {
-        onLogin((await login(email, password)).access_token);
-      }
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : "No se pudo iniciar sesión.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-white">
-    <form onSubmit={submit} className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-      <h1 className="text-3xl font-bold">Financial AI</h1>
-      <p className="mt-2 text-slate-400">{isRegistering ? "Crea tu cuenta financiera." : "Ingresa para ver tus finanzas."}</p>
-      {isRegistering && <><label className="mt-5 block text-sm text-slate-300">Nombre completo</label><input className="mt-2 w-full rounded-lg bg-slate-800 p-3" value={name} onChange={(event) => setName(event.target.value)} required /></>}
-      <label className="mt-8 block text-sm text-slate-300">Correo</label>
-      <input className="mt-2 w-full rounded-lg bg-slate-800 p-3" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-      <label className="mt-5 block text-sm text-slate-300">Contraseña</label>
-      <input className="mt-2 w-full rounded-lg bg-slate-800 p-3" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
-      {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
-      <button className="mt-6 w-full rounded-lg bg-cyan-500 p-3 font-semibold text-slate-950 disabled:opacity-60" disabled={loading}>{loading ? "Procesando..." : isRegistering ? "Crear cuenta" : "Ingresar"}</button>
-      <button type="button" onClick={() => { setIsRegistering(!isRegistering); setError(""); }} className="mt-4 w-full text-sm text-cyan-400 hover:text-cyan-300">{isRegistering ? "Ya tengo una cuenta" : "Crear una cuenta"}</button>
-    </form>
-  </main>;
-}
+export default function LoginForm({ onLogin }: Props) { const [email, setEmail] = useState(""), [name, setName] = useState(""), [password, setPassword] = useState(""), [mode, setMode] = useState<"login" | "register" | "recover">("login"), [message, setMessage] = useState(""), [loading, setLoading] = useState(false); async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setLoading(true); setMessage(""); try { if (mode === "recover") setMessage((await requestPasswordReset(email)).message); else if (mode === "register") { await register(name, email, password); setMode("login"); setMessage("Cuenta creada. Ahora inicia sesión."); } else onLogin((await login(email, password)).access_token); } catch (error) { setMessage(error instanceof ApiError ? error.message : "No se pudo procesar la solicitud."); } finally { setLoading(false); } } return <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-white"><form onSubmit={submit} className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-xl"><h1 className="text-3xl font-bold">Financial AI</h1><p className="mt-2 text-slate-400">{mode === "recover" ? "Te enviaremos un enlace de recuperación." : mode === "register" ? "Crea tu cuenta financiera." : "Ingresa para ver tus finanzas."}</p>{mode === "register" && <input className="mt-5 w-full rounded-lg bg-slate-800 p-3" placeholder="Nombre completo" value={name} onChange={(event) => setName(event.target.value)} required />}<input className="mt-5 w-full rounded-lg bg-slate-800 p-3" type="email" placeholder="Correo" value={email} onChange={(event) => setEmail(event.target.value)} required />{mode !== "recover" && <input className="mt-5 w-full rounded-lg bg-slate-800 p-3" type="password" placeholder="Contraseña" value={password} onChange={(event) => setPassword(event.target.value)} required />}{message && <p className="mt-4 text-sm text-cyan-300">{message}</p>}<button className="mt-6 w-full rounded-lg bg-cyan-500 p-3 font-semibold text-slate-950" disabled={loading}>{loading ? "Procesando..." : mode === "recover" ? "Enviar enlace" : mode === "register" ? "Crear cuenta" : "Ingresar"}</button><button type="button" onClick={() => setMode(mode === "register" ? "login" : "register")} className="mt-4 w-full text-sm text-cyan-400">{mode === "register" ? "Ya tengo una cuenta" : "Crear una cuenta"}</button>{mode !== "register" && <button type="button" onClick={() => setMode(mode === "recover" ? "login" : "recover")} className="mt-3 w-full text-sm text-cyan-400">{mode === "recover" ? "Volver a iniciar sesión" : "Olvidé mi contraseña"}</button>}</form></main>; }

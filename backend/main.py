@@ -11,6 +11,7 @@ from app.routers.liability import router as liability_router
 from app.routers.goal import router as goal_router
 from app.routers.dashboard import router as dashboard_router
 from app.routers.mortgage import router as mortgage_router
+from app.routers.report import router as report_router
 
 app = FastAPI(
     title="Financial AI",
@@ -24,7 +25,10 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
     ],
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,6 +44,7 @@ app.include_router(liability_router)
 app.include_router(goal_router)
 app.include_router(dashboard_router)
 app.include_router(mortgage_router)
+app.include_router(report_router)
 
 
 @app.get("/")

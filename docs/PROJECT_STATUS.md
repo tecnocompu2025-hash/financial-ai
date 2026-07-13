@@ -1,5 +1,13 @@
 # Financial AI
 
+## ImplementaciÃ³n en curso â€” AnalÃ­tica financiera
+
+- Se agregÃ³ `GET /reports/financial` con filtros combinables por mes, aÃ±o, categorÃ­a, tipo y rango de fechas.
+- La pantalla Reportes consume esa fuente Ãºnica para totales, tabla de movimientos, evoluciÃ³n mensual y grÃ¡ficos Recharts.
+- Se prepararon migraciones para clasificar activos, deudas y gastos esenciales.
+- Los indicadores de fondo de emergencia, libertad financiera y recomendaciones usan los datos filtrados disponibles.
+- Pendientes de este alcance: exportaciÃ³n, recuperaciÃ³n de contraseÃ±a, pruebas ampliadas y validaciÃ³n de migraciones en PostgreSQL.
+
 ## Cierre técnico — 2026-07-12
 
 - Formularios visuales activos para ingresos, gastos, activos, deudas, metas, créditos y cuotas.

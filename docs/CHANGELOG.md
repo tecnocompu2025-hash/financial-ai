@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-07-12 â€” Reportes e indicadores financieros
+
+- Nuevo endpoint de reporte filtrable y visualizaciones interactivas.
+- ClasificaciÃ³n de activos/deudas y marcado de gastos esenciales preparados mediante migraciones.
+- Agregadas recomendaciones financieras basadas en reglas y datos del usuario.
+
 ## 2026-07-12 — Documentación técnica
 
 - Actualizados README y endpoints de créditos, pagos, superusuario y arquitectura Repository/Service.

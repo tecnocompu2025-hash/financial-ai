@@ -8,6 +8,7 @@ class ExpenseCreate(BaseModel):
     amount: float = Field(gt=0)
     date: date
     description: str = Field(min_length=1, max_length=250)
+    is_essential: bool = False
 
 
 class ExpenseUpdate(BaseModel):
@@ -15,6 +16,7 @@ class ExpenseUpdate(BaseModel):
     amount: float = Field(gt=0)
     date: date
     description: str = Field(min_length=1, max_length=250)
+    is_essential: bool = False
 
 
 class ExpenseResponse(BaseModel):
@@ -26,3 +28,4 @@ class ExpenseResponse(BaseModel):
     amount: float
     date: date
     description: str
+    is_essential: bool
