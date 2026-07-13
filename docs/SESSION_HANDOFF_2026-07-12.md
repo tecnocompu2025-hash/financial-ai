@@ -9,6 +9,7 @@
 - Se añadió una prueba de esquema para contraseñas de restablecimiento débiles o no coincidentes.
 - La exportación incorpora hojas de evolución, indicadores y recomendaciones; se validan formatos PDF/XLSX en pruebas backend.
 - Se corrigió el límite final de fecha de ingresos y se añadieron pruebas de cálculos y filtro por tipo de los reportes.
+- El perfil dispone de actualización autenticada mediante `PUT /profile/`, con pruebas de servicio.
 
 ## Repositorio
 

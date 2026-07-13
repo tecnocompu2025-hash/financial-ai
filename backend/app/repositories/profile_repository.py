@@ -66,3 +66,10 @@ class ProfileRepository:
             .filter(Profile.user_id == user_id)
             .first()
         )
+
+    def update(self, profile: Profile, data):
+        for field, value in data.model_dump().items():
+            setattr(profile, field, value)
+        self.db.commit()
+        self.db.refresh(profile)
+        return profile

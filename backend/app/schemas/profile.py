@@ -17,3 +17,7 @@ class ProfileResponse(ProfileCreate):
 
     class Config:
         from_attributes = True
+
+
+class ProfileUpdate(ProfileCreate):
+    pass
