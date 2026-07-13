@@ -31,6 +31,18 @@ export type User = {
   is_superuser?: boolean;
 };
 
+export type Profile = {
+  id: number;
+  country: string;
+  currency: string;
+  age: number;
+  marital_status: string;
+  children: number;
+  retirement_age: number;
+  financial_goal: string;
+  monthly_salary: number;
+};
+
 export type Asset = { id: number; user_id: number; name: string; category: string; value: number; classification: "productive" | "non_productive" };
 export type Liability = { id: number; user_id: number; name: string; category: string; balance: number; classification: "good" | "bad"; annual_interest_rate: number };
 export type Goal = { id: number; user_id: number; name: string; target_amount: number; current_amount: number };

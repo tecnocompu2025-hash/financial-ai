@@ -8,7 +8,7 @@ La fuente de verdad de navegación es `web/src/App.tsx`.
 - `Dashboard`.
 - `IncomeManagerV7`, `ExpenseManagerV6`, `AssetManagerV6`, `LiabilityManagerV7` y `GoalManagerV3`.
 - `DebtHubV2`, `AllDebts`, `CreditEditorV2`, `CustomCreditManager`, `CreditManagerV3`, `AmortizationManager` y `PaymentsHubV3`.
-- `ReportManagerV3`, `SettingsManager` y `AdminUsers`.
+- `ReportManagerV3`, `SettingsManagerV2` y `AdminUsers`.
 
 ## Heredados conservados temporalmente
 

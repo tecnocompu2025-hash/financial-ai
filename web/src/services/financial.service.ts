@@ -1,5 +1,5 @@
 import { apiRequest } from "./api";
-import type { AmortizationRow, Asset, CreditPayment, DashboardSummary, Expense, FinancialReport, Goal, Income, Liability, LoginResponse, Mortgage, ReportFilters, User } from "../types/financial";
+import type { AmortizationRow, Asset, CreditPayment, DashboardSummary, Expense, FinancialReport, Goal, Income, Liability, LoginResponse, Mortgage, Profile, ReportFilters, User } from "../types/financial";
 
 export function login(email: string, password: string) {
   return apiRequest<LoginResponse>("/auth/login", undefined, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
@@ -14,6 +14,8 @@ export const confirmPasswordReset = (token: string, new_password: string, confir
 export const getIncomes = (token: string) => apiRequest<Income[]>("/income/", token);
 export const getExpenses = (token: string) => apiRequest<Expense[]>("/expense/", token);
 export const getCurrentUser = (token: string) => apiRequest<User>("/auth/me", token);
+export const getProfile = (token: string) => apiRequest<Profile | null>("/profile/", token);
+export const saveProfile = (token: string, data: Omit<Profile, "id">, exists: boolean) => apiRequest<Profile>("/profile/", token, { method: exists ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
 export const getRegisteredUsers = (token: string) => apiRequest<User[]>("/auth/users", token);
 export const changePassword = (token: string, current_password: string, new_password: string, confirm_password: string) => apiRequest<{ message: string }>("/auth/change-password", token, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ current_password, new_password, confirm_password }) });
 export const getDashboardSummary = (token: string) => apiRequest<DashboardSummary>("/dashboard/summary", token);

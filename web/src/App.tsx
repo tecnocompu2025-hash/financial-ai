@@ -7,7 +7,7 @@ import AssetManagerV6 from "./components/dashboard/AssetManagerV6";
 import LiabilityManagerV7 from "./components/dashboard/LiabilityManagerV7";
 import GoalManagerV3 from "./components/dashboard/GoalManagerV3";
 import ReportManagerV3 from "./components/dashboard/ReportManagerV3";
-import SettingsManager from "./components/dashboard/SettingsManager";
+import SettingsManager from "./components/dashboard/SettingsManagerV2";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { getCurrentUser } from "./services/financial.service";
 import CreditManagerV3 from "./components/dashboard/CreditManagerV3";

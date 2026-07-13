@@ -15,6 +15,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 - Reportes con filtros combinables por mes, año, categoría, tipo y rango de fechas; gráficas y exportación PDF/XLSX con resumen, movimientos, evolución, indicadores y recomendaciones.
 - Clasificación de gastos esenciales, activos productivos/no productivos y pasivos buenos/malos.
 - Frontend React/Vite para los módulos activos.
+- Configuración permite crear o actualizar el perfil financiero, cambiar contraseña y cerrar sesión.
 
 ## Verificado localmente
 
