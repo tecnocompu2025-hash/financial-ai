@@ -9,3 +9,5 @@ class DashboardSummary(BaseModel):
     cash_flow: float
     net_worth: float
     savings_rate: float
+    debt_total: float
+    debt_ratio: float

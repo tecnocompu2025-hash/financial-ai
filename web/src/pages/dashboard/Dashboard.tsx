@@ -45,7 +45,7 @@ export default function Dashboard({ token, onLogout }: Props) {
   const assetTotal = summary?.asset_total ?? 0;
   const liabilityTotal = summary?.liability_total ?? 0;
   const netWorth = summary?.net_worth ?? 0;
-  const debtRate = assetTotal > 0 ? liabilityTotal / assetTotal * 100 : 0;
+  const debtRate = summary?.debt_ratio ?? 0;
   const cashFlow = summary?.cash_flow ?? 0;
   const savingsRate = summary?.savings_rate ?? 0;
   const transactions = [

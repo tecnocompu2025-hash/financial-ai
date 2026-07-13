@@ -13,7 +13,7 @@ Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o co
 - Perfil: creación, consulta y actualización autenticada mediante `PUT /profile/`.
 - CRUD autenticado de ingresos, gastos, activos, pasivos, metas y créditos.
 - Pagos, historial y amortización estimada de créditos.
-- Dashboard: ingresos, gastos, flujo de caja, activos, pasivos, patrimonio neto y tasa de ahorro.
+- Dashboard: ingresos, gastos, flujo de caja, activos, pasivos, deuda total, endeudamiento, patrimonio neto y tasa de ahorro.
 - Reportes con filtros combinables por mes, año, categoría, tipo y rango de fechas; gráficas y exportación PDF/XLSX con resumen, movimientos, evolución, indicadores y recomendaciones.
 - Clasificación de gastos esenciales, activos productivos/no productivos y pasivos buenos/malos.
 - Frontend React/Vite para los módulos activos.

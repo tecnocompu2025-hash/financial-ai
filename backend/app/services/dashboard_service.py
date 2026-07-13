@@ -8,4 +8,6 @@ class DashboardService:
         data["cash_flow"] = data["income_total"] - data["expense_total"]
         data["net_worth"] = data["asset_total"] - data["liability_total"]
         data["savings_rate"] = data["cash_flow"] / data["income_total"] * 100 if data["income_total"] else 0.0
+        data["debt_total"] = data["liability_total"]
+        data["debt_ratio"] = data["debt_total"] / data["asset_total"] * 100 if data["asset_total"] else 0.0
         return data
