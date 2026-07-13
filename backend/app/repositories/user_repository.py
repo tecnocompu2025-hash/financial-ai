@@ -43,6 +43,9 @@ class UserRepository:
             .first()
         )
 
+    def get_all(self):
+        return self.db.query(User).order_by(User.id).all()
+
     def update_password(self, user: User, password_hash: str):
         user.password = password_hash
         self.db.commit()

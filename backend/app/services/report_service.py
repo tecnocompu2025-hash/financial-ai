@@ -1,6 +1,5 @@
 from collections import defaultdict
 
-from app.models.asset import Asset
 from app.repositories.report_repository import ReportRepository
 from app.schemas.report import FinancialReport, MonthlyReportPoint, ReportFilters, ReportTransaction
 
@@ -25,7 +24,7 @@ class ReportService:
         expense_total = sum(item.amount for item in transactions if item.record_type == "expense")
         passive_income = sum(item.amount for item in transactions if item.record_type == "income" and item.is_passive)
         assets, liabilities = self.repository.financial_totals(user_id)
-        productive_assets = sum(float(item.value) for item in self.repository.db.query(Asset).filter_by(user_id=user_id, classification="productive"))
+        productive_assets = self.repository.productive_asset_total(user_id)
         essential_expenses = sum(float(item.amount) for item in expenses if item.is_essential)
         emergency_months = assets / essential_expenses if essential_expenses else 0.0
         financial_freedom = passive_income / expense_total * 100 if expense_total else 0.0

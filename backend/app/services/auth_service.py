@@ -76,6 +76,9 @@ class AuthService:
         self.repository.update_password(user, hash_password(new_password))
         return {"message": "Contraseña actualizada correctamente. Inicia sesión nuevamente."}
 
+    def get_registered_users(self):
+        return self.repository.get_all()
+
     def request_password_reset(self, email: str):
         user = self.repository.get_by_email(email)
         if not user: return {"message": "Si el correo existe, recibirás un enlace de recuperación."}

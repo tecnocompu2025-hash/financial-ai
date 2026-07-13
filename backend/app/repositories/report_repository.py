@@ -35,6 +35,13 @@ class ReportRepository:
         liabilities = total(Liability, Liability.balance) + total(Mortgage, Mortgage.current_balance)
         return assets, liabilities
 
+    def productive_asset_total(self, user_id: int):
+        return float(
+            self.db.query(func.coalesce(func.sum(Asset.value), 0))
+            .filter(Asset.user_id == user_id, Asset.classification == "productive")
+            .scalar()
+        )
+
     @staticmethod
     def _income_filters(query, filters: ReportFilters):
         if filters.category:

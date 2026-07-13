@@ -22,9 +22,12 @@ export function getFinancialReport(token: string, filters: ReportFilters) {
   const suffix = params.size ? `?${params.toString()}` : "";
   return apiRequest<FinancialReport>(`/reports/financial${suffix}`, token);
 }
-export async function downloadFinancialReport(token: string, format: "pdf" | "xlsx") {
+export async function downloadFinancialReport(token: string, format: "pdf" | "xlsx", filters: ReportFilters = {}) {
   const baseUrl = import.meta.env.VITE_API_URL ?? "http://127.0.0.1:8000";
-  const response = await fetch(`${baseUrl}/reports/export/${format}`, { headers: { Authorization: `Bearer ${token}` } });
+  const params = new URLSearchParams();
+  Object.entries(filters).forEach(([key, value]) => { if (value !== undefined && value !== "") params.set(key, String(value)); });
+  const suffix = params.size ? `?${params.toString()}` : "";
+  const response = await fetch(`${baseUrl}/reports/export/${format}${suffix}`, { headers: { Authorization: `Bearer ${token}` } });
   if (!response.ok) throw new Error("No se pudo exportar el reporte.");
   const url = URL.createObjectURL(await response.blob()); const link = document.createElement("a");
   link.href = url; link.download = `reporte-financial-ai.${format}`; link.click(); URL.revokeObjectURL(url);

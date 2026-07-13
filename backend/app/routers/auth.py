@@ -98,4 +98,4 @@ def password_reset_confirm(data: PasswordResetConfirm, db: Session = Depends(get
 
 @router.get("/users")
 def users(current_user: User = Depends(get_current_superuser), db: Session = Depends(get_db)):
-    return [{"id": user.id, "name": user.name, "email": user.email} for user in db.query(User).order_by(User.id).all()]
+    return [{"id": user.id, "name": user.name, "email": user.email} for user in AuthService(db).get_registered_users()]
