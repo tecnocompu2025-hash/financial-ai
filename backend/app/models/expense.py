@@ -27,3 +27,4 @@ class Expense(Base):
     )
 
     is_essential: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_paid: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)

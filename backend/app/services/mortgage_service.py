@@ -2,6 +2,7 @@ from datetime import date
 from calendar import monthrange
 from fastapi import HTTPException
 from app.repositories.mortgage_repository import MortgageRepository
+from app.models.expense import Expense
 
 class MortgageService:
     def __init__(self, db): self.repository = MortgageRepository(db)
@@ -42,6 +43,19 @@ class MortgageService:
             year = item.next_due_date.year + (item.next_due_date.month // 12)
             item.next_due_date = date(year, month, min(item.next_due_date.day, monthrange(year, month)[1]))
         payment = self.repository.add_payment(item, data.amount, round(interest, 2), round(principal_paid, 2), data.paid_date)
+        
+        expense = Expense(
+            user_id=user_id,
+            category="Pago de Crédito/Tarjeta",
+            amount=data.amount,
+            currency=item.currency,
+            date=data.paid_date,
+            description=f"Pago: {item.name}",
+            is_essential=True
+        )
+        self.repository.db.add(expense)
+        self.repository.db.commit()
+
         return {"id": payment.id, "amount": payment.amount, "paid_date": payment.paid_date, "interest_amount": payment.interest_amount, "principal_amount": payment.principal_amount}
     def payments(self, item_id, user_id):
         item = self.repository.get_by_id(item_id, user_id)

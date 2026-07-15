@@ -22,10 +22,11 @@ export default function ExpenseManagerV6({ token }: { token: string }) {
   
   async function save(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const data = { category: String(form.get("category")), description: String(form.get("description")), amount: Number(form.get("amount")), currency: String(form.get("currency")), date: String(form.get("date")), is_essential: form.get("is_essential") === "on" };
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
+    const data = { category: String(form.get("category")), description: String(form.get("description")), amount: Number(form.get("amount")), currency: String(form.get("currency")), date: String(form.get("date")), is_essential: form.get("is_essential") === "on", is_paid: form.get("is_paid") === "on" };
     if (edit) { await updateExpense(token, edit.id, data); setEdit(null); } else await createExpense(token, data);
-    event.currentTarget.reset(); await load();
+    formElement.reset(); await load();
   }
   
   return (
@@ -50,6 +51,9 @@ export default function ExpenseManagerV6({ token }: { token: string }) {
         <label className="flex items-center gap-2 rounded bg-slate-800 px-3 text-sm">
           <input name="is_essential" type="checkbox" defaultChecked={edit?.is_essential} /> Esencial
         </label>
+        <label className="flex items-center gap-2 rounded bg-slate-800 px-3 text-sm" title="Desmarca si lo pagarás después">
+          <input name="is_paid" type="checkbox" defaultChecked={edit ? edit.is_paid : true} /> Pagado
+        </label>
         <button className="rounded bg-cyan-500 px-5 font-semibold text-slate-950">{edit ? "Guardar" : "Agregar"}</button>
         {edit && <button type="button" onClick={() => setEdit(null)}>Cancelar</button>}
       </form>
@@ -58,7 +62,7 @@ export default function ExpenseManagerV6({ token }: { token: string }) {
       <div className="mt-8 max-w-3xl space-y-3">
         {items.map((item) => (
           <div key={item.id} className="flex justify-between rounded bg-slate-900 p-4">
-            <span>{item.category}{item.is_essential && <em className="text-cyan-300"> · Esencial</em>} · {item.date}</span>
+            <span><strong className="text-slate-200">{item.description || item.category}</strong> <span className="text-slate-400 text-sm">({item.category})</span>{item.is_essential && <em className="ml-1 text-cyan-300">· Esencial</em>} · {item.date}{item.is_paid && <span className="ml-2 text-emerald-400 font-semibold text-xs uppercase tracking-wide">Pagado</span>}</span>
             <span>
               {formatCurrency(item.amount, false, item.currency)} 
               <button onClick={() => setEdit(item)} className="ml-3 text-cyan-400">Editar</button>

@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import LoginForm from "./components/auth/LoginFormV3";
 import IncomeManagerV7 from "./components/dashboard/IncomeManagerV7";
 import ExpenseManagerV6 from "./components/dashboard/ExpenseManagerV6";
+import AccountsPayable from "./components/dashboard/AccountsPayable";
 import AssetManagerV6 from "./components/dashboard/AssetManagerV6";
 import LiabilityManagerV7 from "./components/dashboard/LiabilityManagerV7";
 import GoalManagerV3 from "./components/dashboard/GoalManagerV3";
@@ -52,6 +53,7 @@ function App() {
         <Route path="/" element={isSuperuser ? <Navigate to="/admin/users" replace /> : <Dashboard token={token} onLogout={logout} />} />
         <Route path="/income" element={<IncomeManagerV7 token={token} />} />
         <Route path="/expense" element={<ExpenseManagerV6 token={token} />} />
+        <Route path="/accounts-payable" element={<AccountsPayable token={token} />} />
         <Route path="/assets" element={<AssetManagerV6 token={token} />} />
         <Route path="/liabilities" element={<LiabilityManagerV7 token={token} />} />
         <Route path="/debts" element={<DebtHubV2 />} />

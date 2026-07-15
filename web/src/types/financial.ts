@@ -17,6 +17,7 @@ export type Expense = {
   date: string;
   description: string;
   is_essential: boolean;
+  is_paid: boolean;
 };
 
 export type LoginResponse = {

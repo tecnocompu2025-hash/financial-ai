@@ -67,6 +67,7 @@ class ReportRepository:
 
     @staticmethod
     def _expense_filters(query, filters: ReportFilters):
+        query = query.filter(Expense.is_paid == True)
         if filters.category:
             query = query.filter(Expense.category == filters.category)
         if filters.year:

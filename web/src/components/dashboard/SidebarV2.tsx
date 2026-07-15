@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const groups = [
   { title: "RESUMEN", items: [[LayoutDashboard, "Dashboard", "/"], [BarChart3, "Reportes", "/reports"]] },
-  { title: "FLUJO DE CAJA", items: [[Wallet, "Ingresos", "/income"], [CreditCard, "Gastos", "/expense"], [Landmark, "Pagos pendientes", "/payments"]] },
+  { title: "FLUJO DE CAJA", items: [[Wallet, "Ingresos", "/income"], [CreditCard, "Gastos", "/expense"], [CreditCard, "Cuentas por pagar", "/accounts-payable"], [Landmark, "Pagos pendientes", "/payments"]] },
   { title: "CONSTRUYE RIQUEZA", items: [[TrendingUp, "Activos", "/assets"], [Target, "Metas", "/goals"]] },
   { title: "DEUDAS Y CRÉDITOS", items: [[Landmark, "Deudas", "/debts"], [Landmark, "Editar créditos", "/credit-edit"]] },
 ] as const;

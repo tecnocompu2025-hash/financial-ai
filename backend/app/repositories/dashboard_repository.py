@@ -12,8 +12,11 @@ class DashboardRepository:
     def __init__(self, db: Session): self.db = db
 
     def totals(self, user_id: int):
-        def total_by_currency(model, column):
-            results = self.db.query(model.currency, func.sum(column)).filter(model.user_id == user_id).group_by(model.currency).all()
+        def total_by_currency(model, column, additional_filter=None):
+            query = self.db.query(model.currency, func.sum(column)).filter(model.user_id == user_id)
+            if additional_filter is not None:
+                query = query.filter(additional_filter)
+            results = query.group_by(model.currency).all()
             return {curr: float(amt) for curr, amt in results if amt}
 
         liability = total_by_currency(Liability, Liability.balance)
@@ -28,7 +31,7 @@ class DashboardRepository:
 
         return {
             "income_total": total_by_currency(Income, Income.amount),
-            "expense_total": total_by_currency(Expense, Expense.amount),
+            "expense_total": total_by_currency(Expense, Expense.amount, Expense.is_paid == True),
             "asset_total": total_by_currency(Asset, Asset.value),
             "liability_total": liability_combined
         }

@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createLiability, deleteLiability, getLiabilities, updateLiability } from "../../services/financial.service";
 import type { Liability } from "../../types/financial";
 import { useCurrency } from "../../contexts/CurrencyContext";
 const suggestions = ["Préstamo familiar", "Tarjeta de crédito", "Tarjeta de tienda", "Servicios pendientes", "Impuestos pendientes", "Deuda médica", "Préstamo estudiantil", "Deuda de negocio", "Alquiler pendiente", "Otra deuda"];
 export default function LiabilityManagerV7({ token }: { token: string }) {
   const { formatCurrency } = useCurrency();
+  const navigate = useNavigate();
   const [items, setItems] = useState<Liability[]>([]);
   const [edit, setEdit] = useState<Liability | null>(null);
   
@@ -36,7 +38,12 @@ export default function LiabilityManagerV7({ token }: { token: string }) {
   
   return (
     <main className="min-h-screen bg-slate-950 p-8 text-white">
-      <button onClick={() => window.history.back()} className="text-cyan-400">Volver</button>
+      <div className="flex justify-between items-center">
+        <button onClick={() => window.history.back()} className="text-cyan-400">Volver</button>
+        <button onClick={() => navigate("/credit-history")} className="rounded bg-cyan-900 px-4 py-2 text-sm font-semibold text-cyan-100 hover:bg-cyan-800">
+          Ver Historial
+        </button>
+      </div>
       <h1 className="mt-5 text-3xl font-bold">Registrar deuda</h1>
       <p className="mt-2 text-slate-400">Registra el costo para identificar qué deuda conviene priorizar.</p>
       
