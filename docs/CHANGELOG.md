@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-07-14 - Categorías y Multi-moneda
+- **Categorías Inteligentes:** Se reemplazaron los campos de texto de categorías por `<datalist>` en Gastos e Ingresos, ofreciendo categorías predefinidas y soporte total para categorías personalizadas.
+- **Soporte Multi-moneda:** Se implementó `CurrencyContext` global que permite definir la moneda base del usuario.
+- **Toggle USD:** Se agregó un botón en el Header que consulta el tipo de cambio en vivo desde una API pública y convierte instantáneamente todos los valores del Dashboard a Dólares (USD).
+- **Refactorización de UI:** Se erradicó el símbolo "S/" (Soles) escrito en duro de 16 componentes, usando `Intl.NumberFormat` dinámico con soporte de compactación.
+
+## 2026-07-14 - Dashboard MVP Finalizado
+
+- Se rediseñó por completo el Dashboard profesional con estilo Premium (modo oscuro, "glassmorphism", gradientes).
+- Se implementaron tarjetas animadas de Net Worth, Flujo de Caja, Activos, Deudas e Ingresos/Gastos.
+- Se refactorizó la visualización del Patrimonio Neto (`WealthChart`) usando `recharts` con gradientes.
+- Se implementó un AI Advisor estilo chat.
+- El Financial Score ahora cuenta con un círculo de progreso radial dinámico e interactivo.
+- Se eliminaron todos los componentes frontend "Legacy" o V1/V5/V6 heredados que ya no estaban en uso (`AssetManagerV5`, etc.).
+- El Build de producción de frontend pasa sin errores.
 ## 2026-07-13 - Release preparation
 
 - Created local source and PostgreSQL backups before Git synchronization.

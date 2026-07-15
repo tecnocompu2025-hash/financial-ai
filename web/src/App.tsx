@@ -20,6 +20,7 @@ import AdminUsers from "./components/dashboard/AdminUsers";
 import AllDebts from "./components/dashboard/AllDebts";
 import ResetPasswordForm from "./components/auth/ResetPasswordForm";
 import { ApiError } from "./services/api";
+import { CurrencyProvider } from "./contexts/CurrencyContext";
 
 const TOKEN_KEY = "financial_ai_access_token";
 
@@ -44,25 +45,30 @@ function App() {
     <Route path="*" element={<LoginForm onLogin={(value) => { localStorage.setItem(TOKEN_KEY, value); setToken(value); }} />} />
   </Routes>;
   const logout = () => { localStorage.removeItem(TOKEN_KEY); setToken(null); };
-  return <Routes>
-    <Route path="/" element={isSuperuser ? <Navigate to="/admin/users" replace /> : <Dashboard token={token} onLogout={logout} />} />
-    <Route path="/income" element={<IncomeManagerV7 token={token} />} />
-    <Route path="/expense" element={<ExpenseManagerV6 token={token} />} />
-    <Route path="/assets" element={<AssetManagerV6 token={token} />} />
-    <Route path="/liabilities" element={<LiabilityManagerV7 token={token} />} />
-    <Route path="/debts" element={<DebtHubV2 />} />
-    <Route path="/all-debts" element={<AllDebts token={token} />} />
-    <Route path="/credit-edit" element={<CreditEditorV2 token={token} />} />
-    <Route path="/admin/users" element={<AdminUsers token={token} onLogout={logout} />} />
-    <Route path="/mortgages" element={<CustomCreditManager token={token} />} />
-    <Route path="/credit-history" element={<CreditManagerV3 token={token} />} />
-    <Route path="/amortization" element={<AmortizationManager token={token} />} />
-    <Route path="/payments" element={<PaymentsHubV3 token={token} />} />
-    <Route path="/goals" element={<GoalManagerV3 token={token} />} />
-    <Route path="/reports" element={<ReportManagerV3 token={token} />} />
-    <Route path="/settings" element={<SettingsManager token={token} />} />
-    <Route path="*" element={<Navigate to="/" replace />} />
-  </Routes>;
+  
+  return (
+    <CurrencyProvider token={token}>
+      <Routes>
+        <Route path="/" element={isSuperuser ? <Navigate to="/admin/users" replace /> : <Dashboard token={token} onLogout={logout} />} />
+        <Route path="/income" element={<IncomeManagerV7 token={token} />} />
+        <Route path="/expense" element={<ExpenseManagerV6 token={token} />} />
+        <Route path="/assets" element={<AssetManagerV6 token={token} />} />
+        <Route path="/liabilities" element={<LiabilityManagerV7 token={token} />} />
+        <Route path="/debts" element={<DebtHubV2 />} />
+        <Route path="/all-debts" element={<AllDebts token={token} />} />
+        <Route path="/credit-edit" element={<CreditEditorV2 token={token} />} />
+        <Route path="/admin/users" element={<AdminUsers token={token} onLogout={logout} />} />
+        <Route path="/mortgages" element={<CustomCreditManager token={token} />} />
+        <Route path="/credit-history" element={<CreditManagerV3 token={token} />} />
+        <Route path="/amortization" element={<AmortizationManager token={token} />} />
+        <Route path="/payments" element={<PaymentsHubV3 token={token} />} />
+        <Route path="/goals" element={<GoalManagerV3 token={token} />} />
+        <Route path="/reports" element={<ReportManagerV3 token={token} />} />
+        <Route path="/settings" element={<SettingsManager token={token} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </CurrencyProvider>
+  );
 }
 
 export default App;

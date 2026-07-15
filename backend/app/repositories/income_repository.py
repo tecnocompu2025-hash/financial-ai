@@ -12,7 +12,7 @@ class IncomeRepository:
 
         income = Income(
             user_id=user_id,
-            **data.model_dump()
+            **data.model_dump(exclude_unset=True)
         )
 
         self.db.add(income)
@@ -43,7 +43,7 @@ class IncomeRepository:
 
     def update(self, income: Income, data):
 
-        values = data.model_dump()
+        values = data.model_dump(exclude_unset=True)
 
         for key, value in values.items():
             setattr(income, key, value)

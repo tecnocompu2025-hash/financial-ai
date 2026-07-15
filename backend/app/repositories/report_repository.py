@@ -29,18 +29,27 @@ class ReportRepository:
         return incomes, expenses
 
     def financial_totals(self, user_id: int):
-        def total(model, column):
-            return float(self.db.query(func.coalesce(func.sum(column), 0)).filter(model.user_id == user_id).scalar())
-        assets = total(Asset, Asset.value)
-        liabilities = total(Liability, Liability.balance) + total(Mortgage, Mortgage.current_balance)
-        return assets, liabilities
+        def total_by_currency(model, column):
+            results = self.db.query(model.currency, func.sum(column)).filter(model.user_id == user_id).group_by(model.currency).all()
+            return {curr: float(amt) for curr, amt in results if amt}
+            
+        assets_dict = total_by_currency(Asset, Asset.value)
+        liability_dict = total_by_currency(Liability, Liability.balance)
+        mortgage_dict = total_by_currency(Mortgage, Mortgage.current_balance)
+        
+        for k, v in mortgage_dict.items():
+            liability_dict[k] = liability_dict.get(k, 0) + v
+            
+        return assets_dict, liability_dict
 
     def productive_asset_total(self, user_id: int):
-        return float(
-            self.db.query(func.coalesce(func.sum(Asset.value), 0))
+        results = (
+            self.db.query(Asset.currency, func.sum(Asset.value))
             .filter(Asset.user_id == user_id, Asset.classification == "productive")
-            .scalar()
+            .group_by(Asset.currency)
+            .all()
         )
+        return {curr: float(amt) for curr, amt in results if amt}
 
     @staticmethod
     def _income_filters(query, filters: ReportFilters):

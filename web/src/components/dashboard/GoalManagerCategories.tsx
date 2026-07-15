@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { createGoal, deleteGoal, getGoals, updateGoal } from "../../services/financial.service";
 import type { Goal } from "../../types/financial";
+import { useCurrency } from "../../contexts/CurrencyContext";
 
 const goalCategories = [
   "Fondo de emergencia", "Pago de deudas", "Vivienda", "Vehículo", "Educación", "Viajes",
@@ -9,6 +10,8 @@ const goalCategories = [
 ];
 
 export default function GoalManagerCategories({ token }: { token: string }) {
+  const { formatCurrency } = useCurrency();
+
   const [items, setItems] = useState<Goal[]>([]);
   const [category, setCategory] = useState(goalCategories[0]);
   const [customCategory, setCustomCategory] = useState("");
@@ -54,7 +57,7 @@ export default function GoalManagerCategories({ token }: { token: string }) {
     </form>
     <div className="mt-8 max-w-3xl space-y-3">{items.map((item) => {
       const percent = Math.min(100, item.current_amount / item.target_amount * 100);
-      return <div key={item.id} className="rounded-lg bg-slate-900 p-4"><div className="flex justify-between gap-4"><span>{item.name}</span><div className="flex shrink-0 gap-3"><button onClick={() => void updateProgress(item)} className="text-cyan-400">Actualizar</button><button onClick={() => void remove(item)} className="text-red-400">Eliminar</button></div></div><p className="mt-2 text-cyan-400">S/ {item.current_amount.toFixed(2)} de S/ {item.target_amount.toFixed(2)} · {percent.toFixed(0)}%</p><div className="mt-2 h-2 rounded bg-slate-700"><div className="h-2 rounded bg-cyan-400" style={{ width: `${percent}%` }} /></div></div>;
+      return <div key={item.id} className="rounded-lg bg-slate-900 p-4"><div className="flex justify-between gap-4"><span>{item.name}</span><div className="flex shrink-0 gap-3"><button onClick={() => void updateProgress(item)} className="text-cyan-400">Actualizar</button><button onClick={() => void remove(item)} className="text-red-400">Eliminar</button></div></div><p className="mt-2 text-cyan-400">{formatCurrency(item.current_amount)} de {formatCurrency(item.target_amount)} · {percent.toFixed(0)}%</p><div className="mt-2 h-2 rounded bg-slate-700"><div className="h-2 rounded bg-cyan-400" style={{ width: `${percent}%` }} /></div></div>;
     })}</div>
   </main>;
 }

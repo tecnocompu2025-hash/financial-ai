@@ -5,17 +5,21 @@ from datetime import datetime
 class IncomeCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     amount: float = Field(gt=0)
+    currency: str = "PEN"
     category: str = Field(min_length=1, max_length=50)
     frequency: str = Field(min_length=1, max_length=30)
     is_passive: bool = False
+    created_at: datetime | None = None
 
 
 class IncomeUpdate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     amount: float = Field(gt=0)
+    currency: str = "PEN"
     category: str = Field(min_length=1, max_length=50)
     frequency: str = Field(min_length=1, max_length=30)
     is_passive: bool
+    created_at: datetime | None = None
 
 
 class IncomeResponse(BaseModel):

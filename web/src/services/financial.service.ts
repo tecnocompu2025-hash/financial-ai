@@ -30,13 +30,26 @@ export async function downloadFinancialReport(token: string, format: "pdf" | "xl
   const params = new URLSearchParams();
   Object.entries(filters).forEach(([key, value]) => { if (value !== undefined && value !== "") params.set(key, String(value)); });
   const suffix = params.size ? `?${params.toString()}` : "";
-  const response = await fetch(`${baseUrl}/reports/export/${format}${suffix}`, { headers: { Authorization: `Bearer ${token}` } });
+  const response = await fetch(`${baseUrl}/reports/export/${format}${suffix}`, { 
+    cache: "no-store",
+    headers: { Authorization: `Bearer ${token}` } 
+  });
   if (!response.ok) throw new Error("No se pudo exportar el reporte.");
-  const url = URL.createObjectURL(await response.blob()); const link = document.createElement("a");
-  link.href = url; link.download = `reporte-financial-ai.${format}`; link.click(); URL.revokeObjectURL(url);
+  const blob = await response.blob();
+  const blobType = format === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  const fileBlob = new Blob([blob], { type: blobType });
+  const url = URL.createObjectURL(fileBlob);
+  
+  if (format === "pdf") {
+    window.open(url, "_blank");
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } else {
+    const link = document.createElement("a");
+    link.href = url; link.download = `reporte-financial-ai.${format}`; link.click(); URL.revokeObjectURL(url);
+  }
 }
 
-export type IncomePayload = Omit<Income, "id" | "user_id" | "created_at">;
+export type IncomePayload = Omit<Income, "id" | "user_id" | "created_at"> & { created_at?: string };
 
 export const createIncome = (token: string, data: IncomePayload) => apiRequest<Income>("/income/", token, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
 export const updateIncome = (token: string, id: number, data: IncomePayload) => apiRequest<Income>(`/income/${id}`, token, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });

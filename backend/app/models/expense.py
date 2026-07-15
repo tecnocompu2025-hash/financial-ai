@@ -18,6 +18,7 @@ class Expense(Base):
     category: Mapped[str] = mapped_column(String(100))
 
     amount: Mapped[float] = mapped_column(Float)
+    currency: Mapped[str] = mapped_column(String(3), default='PEN')
 
     date: Mapped[date] = mapped_column(Date)
 

@@ -23,6 +23,8 @@ def report_filters(
     record_type: str = Query(default="all", pattern="^(all|income|expense)$"),
     date_from: date | None = None,
     date_to: date | None = None,
+    base_currency: str = Query(default="PEN"),
+    exchange_rate: float = Query(default=1.0),
 ):
     try:
         return ReportFilters(
@@ -32,6 +34,8 @@ def report_filters(
             record_type=record_type,
             date_from=date_from,
             date_to=date_to,
+            base_currency=base_currency,
+            exchange_rate=exchange_rate,
         )
     except ValidationError as error:
         raise RequestValidationError(error.errors()) from error
@@ -55,7 +59,23 @@ def export_report(
 ):
     if format not in {"pdf", "xlsx"}:
         raise HTTPException(status_code=404, detail="Formato no soportado")
+        
+    currency_code = filters.base_currency
+    
+    currency_symbols = {
+        "PEN": "S/ ",
+        "USD": "$ ",
+        "EUR": "€ ",
+        "GBP": "£ ",
+        "JPY": "¥ ",
+        "MXN": "$ ",
+        "COP": "$ ",
+        "ARS": "$ ",
+        "CLP": "$ "
+    }
+    symbol = currency_symbols.get(currency_code, currency_code + " ")
+
     report = ReportService(db).financial_report(current_user.id, filters)
-    stream = ReportExportService.pdf(report) if format == "pdf" else ReportExportService.excel(report)
+    stream = ReportExportService.pdf(report, symbol) if format == "pdf" else ReportExportService.excel(report, symbol)
     media_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     return StreamingResponse(stream, media_type=media_type, headers={"Content-Disposition": f'attachment; filename="reporte-financial-ai.{format}"'})

@@ -12,20 +12,21 @@ export default function Layout({ children, userName, onLogout }: Props) {
   const displayName = formatName(userName);
 
   return (
-    <div className="flex h-screen bg-slate-950 text-white">
-
+    <div className="flex h-screen bg-[#020617] text-slate-200">
+      {/* Sidebar is fixed on the left */}
       <SidebarV2 userName={displayName} onLogout={onLogout} />
 
-      <div className="flex flex-col flex-1">
-
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Header stays on top */}
         <Header userName={displayName} />
 
-        <main className="flex-1 p-8 overflow-auto">
-          {children}
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-8 custom-scrollbar">
+          <div className="mx-auto max-w-7xl">
+            {children}
+          </div>
         </main>
-
       </div>
-
     </div>
   );
 }

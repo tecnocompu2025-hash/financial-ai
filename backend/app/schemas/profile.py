@@ -10,6 +10,9 @@ class ProfileCreate(BaseModel):
     retirement_age: int = Field(ge=18, le=120)
     financial_goal: str = Field(min_length=1, max_length=255)
     monthly_salary: float = Field(ge=0)
+    custom_exchange_rate: float | None = None
+    donation_percentage: float = Field(ge=0, le=100, default=0.0)
+    quality_of_life_percentage: float = Field(ge=0, le=100, default=0.0)
 
     @model_validator(mode="after")
     def retirement_must_follow_current_age(self):

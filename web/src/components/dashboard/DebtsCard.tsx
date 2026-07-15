@@ -1,13 +1,18 @@
-export default function DebtsCard({ total }: { total: number }) {
-  return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-      <p className="text-slate-400 text-sm">
-        Deudas
-      </p>
+import { Landmark } from "lucide-react";
+import FinancialCard from "./FinancialCard";
+import { useCurrency } from "../../contexts/CurrencyContext";
 
-      <h2 className="text-4xl font-bold mt-2 text-red-400">
-        S/ {total.toFixed(2)}
-      </h2>
-    </div>
+export default function DebtsCard({ total }: { total: number }) {
+  const { formatCurrency } = useCurrency();
+  return (
+    <FinancialCard 
+      title="Pasivos (Deudas)" 
+      value={formatCurrency(total)} 
+      color="text-rose-400"
+      icon={<Landmark size={20} className="text-rose-400" />}
+      trend="down"
+      subtitle="Recursos que sacan dinero de tu bolsillo"
+    />
   );
 }
+

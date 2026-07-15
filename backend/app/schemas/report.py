@@ -11,6 +11,8 @@ class ReportFilters(BaseModel):
     record_type: Literal["all", "income", "expense"] = "all"
     date_from: date | None = None
     date_to: date | None = None
+    base_currency: str = "PEN"
+    exchange_rate: float = 1.0
 
     @model_validator(mode="after")
     def validate_date_range(self):

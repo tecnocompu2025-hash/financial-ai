@@ -10,22 +10,42 @@ class ReportService:
 
     def financial_report(self, user_id: int, filters: ReportFilters) -> FinancialReport:
         incomes, expenses = self.repository.records(user_id, filters)
+        
+        base_currency = filters.base_currency
+        rate = filters.exchange_rate
+
+        def convert(amount, currency):
+            if currency == base_currency:
+                return amount
+            if currency == "USD" and base_currency != "USD":
+                return amount * rate if rate > 0 else amount
+            if currency != "USD" and base_currency == "USD":
+                return amount / rate if rate > 0 else amount
+            return amount
+
         transactions = [
             ReportTransaction(id=item.id, record_type="income", name=item.name, category=item.category,
-                              amount=float(item.amount), date=item.created_at.date(), is_passive=item.is_passive)
+                              amount=convert(float(item.amount), item.currency), date=item.created_at.date(), is_passive=item.is_passive)
             for item in incomes
         ] + [
             ReportTransaction(id=item.id, record_type="expense", name=item.description, category=item.category,
-                              amount=float(item.amount), date=item.date)
+                              amount=convert(float(item.amount), item.currency), date=item.date)
             for item in expenses
         ]
         transactions.sort(key=lambda item: item.date, reverse=True)
         income_total = sum(item.amount for item in transactions if item.record_type == "income")
         expense_total = sum(item.amount for item in transactions if item.record_type == "expense")
         passive_income = sum(item.amount for item in transactions if item.record_type == "income" and item.is_passive)
-        assets, liabilities = self.repository.financial_totals(user_id)
-        productive_assets = self.repository.productive_asset_total(user_id)
-        essential_expenses = sum(float(item.amount) for item in expenses if item.is_essential)
+        
+        assets_dict, liabilities_dict = self.repository.financial_totals(user_id)
+        productive_assets_dict = self.repository.productive_asset_total(user_id)
+        
+        assets = sum(convert(amt, curr) for curr, amt in assets_dict.items())
+        liabilities = sum(convert(amt, curr) for curr, amt in liabilities_dict.items())
+        productive_assets = sum(convert(amt, curr) for curr, amt in productive_assets_dict.items())
+        
+        essential_expenses = sum(convert(float(item.amount), item.currency) for item in expenses if item.is_essential)
+        
         emergency_months = assets / essential_expenses if essential_expenses else 0.0
         financial_freedom = passive_income / expense_total * 100 if expense_total else 0.0
         recommendations = self._recommendations(assets, liabilities, expense_total, passive_income, emergency_months, transactions)

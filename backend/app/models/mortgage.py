@@ -9,6 +9,7 @@ class Mortgage(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     principal: Mapped[float] = mapped_column(Float, nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), nullable=False, default="PEN")
     current_balance: Mapped[float] = mapped_column(Float, nullable=False)
     credit_type: Mapped[str] = mapped_column(String(30), nullable=False, default="Hipotecario")
     credit_limit: Mapped[float | None] = mapped_column(Float, nullable=True)

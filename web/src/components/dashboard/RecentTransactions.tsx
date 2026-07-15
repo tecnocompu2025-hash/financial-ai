@@ -1,4 +1,5 @@
-import {
+
+import { useCurrency } from "../../contexts/CurrencyContext";import {
   IconArrowDownRight,
   IconArrowUpRight,
 } from "@tabler/icons-react";
@@ -6,6 +7,8 @@ import {
 type Transaction = { id: number; title: string; amount: number; type: "income" | "expense" };
 
 export default function RecentTransactions({ transactions }: { transactions: Transaction[] }) {
+  const { formatCurrency } = useCurrency();
+
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
 
@@ -42,7 +45,7 @@ export default function RecentTransactions({ transactions }: { transactions: Tra
                   : "text-red-400"
               }
             >
-              {item.type === "income" ? "+" : "-"} S/ {item.amount.toFixed(2)}
+              {item.type === "income" ? "+" : "-"} {formatCurrency(item.amount)}
             </span>
 
           </div>

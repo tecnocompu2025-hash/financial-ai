@@ -2,12 +2,7 @@ from pydantic import BaseModel
 
 
 class DashboardSummary(BaseModel):
-    income_total: float
-    expense_total: float
-    asset_total: float
-    liability_total: float
-    cash_flow: float
-    net_worth: float
-    savings_rate: float
-    debt_total: float
-    debt_ratio: float
+    income_total: dict[str, float]
+    expense_total: dict[str, float]
+    asset_total: dict[str, float]
+    liability_total: dict[str, float]

@@ -1,13 +1,16 @@
 # Financial AI
 
-## Release status - 2026-07-13
+## Release status - 2026-07-15
 
-- Backend: FastAPI, PostgreSQL, SQLAlchemy, Alembic, JWT, services and repositories are active.
-- Financial modules: income, expense, assets, liabilities, goals, credits, payments and amortization are implemented.
-- Analytics: filtered reports, interactive charts, emergency-fund and financial-freedom indicators, classifications and rule recommendations are implemented.
-- Security: authenticated password change and email reset tokens with a 30-minute expiry are implemented.
-- Validation: backend unit tests pass (11/11); frontend production build passes.
+- Mejoras de UI en el módulo de Ingresos (IncomeManagerV7):
+  - Integración de campo `created_at` para permitir registros históricos.
+  - Implementación de lista dinámica de bancos según el país del perfil (auto-completado con `<datalist>`) extraídos del historial de registros.
+- Mejoras de UI en el módulo de Patrimonio/Activos (AssetManagerV6):
+  - Separación visual inteligente de Cuentas/Liquidez vs Inversiones/Propiedades.
+  - Fix de actualización de estado y visualización de mensajes de error en creación de activos.
 - Deployment pending: configure VPS, domain, HTTPS, production CORS, SMTP credentials and production environment variables.
+
+## Release status - 2026-07-14
 
 ## ImplementaciÃ³n en curso â€” AnalÃ­tica financiera
 

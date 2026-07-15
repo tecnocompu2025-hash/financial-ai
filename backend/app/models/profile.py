@@ -28,3 +28,9 @@ class Profile(Base):
     financial_goal: Mapped[str] = mapped_column(String(255))
 
     monthly_salary: Mapped[float] = mapped_column(Float)
+
+    custom_exchange_rate: Mapped[float] = mapped_column(Float, nullable=True)
+
+    donation_percentage: Mapped[float] = mapped_column(Float, default=0.0)
+    
+    quality_of_life_percentage: Mapped[float] = mapped_column(Float, default=0.0)

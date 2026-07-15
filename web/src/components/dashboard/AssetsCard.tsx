@@ -1,13 +1,18 @@
-export default function AssetsCard({ total }: { total: number }) {
-  return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-      <p className="text-slate-400 text-sm">
-        Activos
-      </p>
+import { TrendingUp } from "lucide-react";
+import FinancialCard from "./FinancialCard";
+import { useCurrency } from "../../contexts/CurrencyContext";
 
-      <h2 className="text-4xl font-bold mt-2">
-        S/ {total.toFixed(2)}
-      </h2>
-    </div>
+export default function AssetsCard({ total }: { total: number }) {
+  const { formatCurrency } = useCurrency();
+  return (
+    <FinancialCard 
+      title="Activos Totales" 
+      value={formatCurrency(total)} 
+      color="text-emerald-400"
+      icon={<TrendingUp size={20} className="text-emerald-400" />}
+      trend="up"
+      subtitle="Recursos que ponen dinero en tu bolsillo"
+    />
   );
 }
+
