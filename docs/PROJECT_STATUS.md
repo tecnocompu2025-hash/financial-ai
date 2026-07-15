@@ -2,6 +2,10 @@
 
 ## Release status - 2026-07-15
 
+- Implementación del Módulo Cuentas por Pagar (Accounts Payable):
+  - Nuevo modelo de datos en base de datos (`is_paid` en `expenses` vía Alembic).
+  - Vistas separadas para gastos pendientes en un módulo dedicado, y exclusión de los mismos del flujo de caja hasta que se marquen como pagados.
+  - Interacciones seguras en el frontend para confirmaciones de pago y eliminación de registros.
 - Mejoras de UI en el módulo de Ingresos (IncomeManagerV7):
   - Integración de campo `created_at` para permitir registros históricos.
   - Implementación de lista dinámica de bancos según el país del perfil (auto-completado con `<datalist>`) extraídos del historial de registros.

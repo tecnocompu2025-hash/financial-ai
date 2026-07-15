@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-07-15 - Módulo de Cuentas por Pagar
+- **Cuentas por Pagar:** Se implementó un nuevo módulo dedicado para el registro y seguimiento de cuentas pendientes de pago.
+- **Control de Flujo de Caja:** Los gastos no pagados (marcados como pendientes) ya no descuentan del flujo de caja del Dashboard ni suman al total de reportes hasta que se confirmen como pagados.
+- **Mejoras en el Registro de Gastos:** Se agregó un checkbox "Pagado" y un identificador visual "Pagado" (en verde) para reconocer ágilmente las cuentas saldadas en la tabla principal.
+- **Acciones de Cuentas Pendientes:** Los gastos pendientes pueden ser pagados (con confirmación inmediata) o eliminados desde la vista exclusiva.
 ## 2026-07-14 - Categorías y Multi-moneda
 - **Categorías Inteligentes:** Se reemplazaron los campos de texto de categorías por `<datalist>` en Gastos e Ingresos, ofreciendo categorías predefinidas y soporte total para categorías personalizadas.
 - **Soporte Multi-moneda:** Se implementó `CurrencyContext` global que permite definir la moneda base del usuario.

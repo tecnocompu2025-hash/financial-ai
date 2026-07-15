@@ -10,5 +10,10 @@
   - Se dividió visualmente el módulo de activos en dos secciones: **Liquidez y Cuentas** (dinero en efectivo y bancos) e **Inversiones y Propiedades** (bienes de largo plazo).
   - Se reparó un bug en la UI donde el formulario no refrescaba el listado automáticamente si había una excepción de validación oculta.
 
+- **Módulo de Cuentas por Pagar**:
+  - Nuevo modelo de datos (`is_paid`) en backend para registrar estados de gastos.
+  - Vistas separadas para cuentas por pagar con exclusión del monto del flujo de caja.
+  - Opciones claras de "Pagar" y "Eliminar" con mitigación de borrados accidentales.
+
 ## Próximos Pasos (Siguiente Sesión)
 - **Despliegue a Producción**: Iniciar la configuración en el servidor VPS del usuario. Esto incluye preparar el entorno de Docker, base de datos de producción (PostgreSQL), configuración de un proxy inverso (Nginx) y certificados HTTPS (Let's Encrypt) para que la aplicación sea accesible desde cualquier dispositivo móvil.
