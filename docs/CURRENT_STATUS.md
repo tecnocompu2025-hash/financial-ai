@@ -1,8 +1,8 @@
 # Financial AI — estado vigente
 
-Actualizado: 2026-07-12. Este documento reemplaza las afirmaciones antiguas o con problemas de codificación de otros documentos. La fuente de verdad es el código, las migraciones y las pruebas ejecutadas.
+Actualizado: 2026-07-15. Este documento reemplaza las afirmaciones antiguas o con problemas de codificación de otros documentos. La fuente de verdad es el código, las migraciones y las pruebas ejecutadas.
 
-Última verificación local: 2026-07-13 — 37 pruebas backend, 2 pruebas frontend, lint, build web y configuración de Docker Compose correctos. No existe despliegue público ni push nuevo a GitHub en esta sesión.
+Última verificación local: 2026-07-15 — pruebas backend y frontend exitosas. UI de Dashboard (Ingresos y Activos) mejorada y refactorizada. No existe despliegue público en esta sesión.
 
 ## Implementado
 
